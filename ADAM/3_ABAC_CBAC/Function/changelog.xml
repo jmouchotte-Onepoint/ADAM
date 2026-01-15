@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/3_ABAC_CBAC/FUNCTION/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="ABAC-CHECK-ATTRIBUTES">
+        <comment>ABAC : Création des règles pour évaluer les attributes sous forme de json clef, valeur, operator</comment>
+        <sqlFile path="ABAC-CHECK-ATTRIBUTES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="ABAC-CHECK-ALL-ATTRIBUTES-FROM-VIEW">
+        <comment>ABAC : Création de la fonction pour évaluer tous les attributs d'une relations selon son ID et des attributs de la vue</comment>
+        <sqlFile path="ABAC-CHECK-ALL-ATTRIBUTES-FROM-VIEW.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

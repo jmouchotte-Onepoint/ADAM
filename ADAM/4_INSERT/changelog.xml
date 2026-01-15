@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/4_INSERT/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="INSERT-TENANTS" context="dev">
+        <comment>INSERT : Peuplage des tenants en mode de test</comment>
+        <sqlFile path="INSERT-TENANTS.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    
+    <changeSet author="noMemoryLeak" id="INSERT-MODEL-POLICY">
+        <comment>INSERT : Ajout des policy de création selon le model yml</comment>
+        <sqlFile path="INSERT-MODEL-POLICY.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="INSERT-DYNAMIC-RULES">
+        <comment>INSERT : Ajout des règles SQL dynamique</comment>
+        <sqlFile path="INSERT-DYNAMIC-RULES.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="INSERT-RLS-POLICY">
+        <comment>INSERT : Initialisatione et création de RLS sur les tables</comment>
+        <sqlFile path="INSERT-RLS-POLICY.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="INSERT-MODEL-RULES">
+        <comment>INSERT : Ajout des règles associées aux modèles pour limiter les écritures</comment>
+        <sqlFile path="INSERT-MODEL-POLICY-RULES.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog>

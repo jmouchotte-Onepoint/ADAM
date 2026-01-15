@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/2_RUBAC/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="RUBAC-RULES-DYNAMIC">
+        <comment>RUBAC : Création de la table pour les règles</comment>
+        <sqlFile path="RUBAC-RULES-DYNAMIC.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-RULES-MODEL">
+        <comment>RUBAC : Création de la table associer les règles aux règles du model</comment>
+        <sqlFile path="RUBAC-RULES-MODEL.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-RULES-RELATIONS">
+        <comment>RUBAC : Création de la table associer les règles aux relations</comment>
+        <sqlFile path="RUBAC-RULES-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-RULES-ROLES">
+        <comment>RUBAC : Création de la table associer les règles aux roles</comment>
+        <sqlFile path="RUBAC-RULES-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-RULES-PERMISSIONS">
+        <comment>RUBAC : Création de la table pour associer les règles aux permissions</comment>
+        <sqlFile path="RUBAC-RULES-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <include file="ADAM/2_RUBAC/Function/changelog.xml"/>
+    <include file="ADAM/2_RUBAC/Policy/changelog.xml"/>
+    <include file="ADAM/2_RUBAC/View/changelog.xml"/>
+    <include file="ADAM/2_RUBAC/Trigger/changelog.xml"/>
+
+</databaseChangeLog>

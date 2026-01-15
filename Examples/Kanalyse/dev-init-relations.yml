@@ -1,0 +1,75 @@
+tenantA:
+  # Add Collaborateur
+  - user: "users:collaborateur-1"
+    relation: "collaborateur"
+    object: "client:collaborateur-1"
+
+  - user: "users:collaborateur-2"
+    relation: "collaborateur"
+    object: "client:collaborateur-2"
+
+  - user: "users:collaborateur-3"
+    relation: "collaborateur"
+    object: "client:collaborateur-3"
+
+  #Add Adherents
+  - user: "users:adherent-1"
+    relation: "adherent"
+    object: "client:adherent-1"
+
+  - user: "users:adherent-2"
+    relation: "adherent"
+    object: "client:adherent-2"
+
+  # Collaborateur dataController
+  - user: "client:collaborateur-2"
+    relation: "dataController"
+    object: "kanalyse:kanalyse-tenant-A"
+
+  - user: "client:collaborateur-3"
+    relation: "dataController"
+    object: "kanalyse:kanalyse-tenant-A"
+
+  # Dossier 1A
+  - user: "kanalyse:kanalyse-tenant-A"
+    relation: "parent"
+    object: "dossier:dossier-1A"
+
+  - user: "client:adherent-1"
+    relation: "proprietaire"
+    object: "dossier:dossier-1A"
+
+  - user: "client:collaborateur-1"
+    relation: "gestionnaire"
+    object: "dossier:dossier-1A"
+
+  # Dossier 2A
+  - user: "kanalyse:kanalyse-tenant-A"
+    relation: "parent"
+    object: "dossier:dossier-2A"
+  
+  - user: "client:adherent-1"
+    relation: "proprietaire"
+    object: "dossier:dossier-2A"
+
+  # Dossier 3A
+  - user: "kanalyse:kanalyse-tenant-A"
+    relation: "parent"
+    object: "dossier:dossier-3A"
+
+  - user: "client:adherent-2"
+    relation: "proprietaire"
+    object: "dossier:dossier-3A"
+
+  - user: "client:collaborateur-1"
+    relation: "gestionnaire"
+    object: "dossier:dossier-3A"
+
+  - user: "client:collaborateur-3"
+    relation: "gestionnaire"
+    object: "dossier:dossier-3A"
+
+  # Dossier 4A
+  - user: "kanalyse:kanalyse-tenant-A"
+    relation: "parent"
+    object: "dossier:dossier-4A"

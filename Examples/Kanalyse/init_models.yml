@@ -1,0 +1,67 @@
+tenants:
+  - id: tenantA
+    name: My_Tenant_A
+    description: Tenant principale pour les tests
+  - id: tenantB
+    name: My_Tenant_B
+    description: Tenant secondaire pour montrer l'isolation
+
+rules:
+  - id: 6bb6f839-61d5-4968-9fa1-87383df1344d
+    sql: select 1 from qfq.dossier as dossier where dossier.id= $idDossier and dossier.is_confidentiel = $isConfidentiel;
+    params:
+      - idDossier
+      - isConfidentiel
+
+models: 
+  type client:
+    relations:
+      - collaborateur:
+        - relations: users
+      - adherent:
+        - relations: users
+
+  type kanalyse:
+    relations:
+      - dataController:
+        - relations: client#collaborateur
+      - statistique:
+        - relations: client#collaborateur
+      - admin:
+        - relations: client#collaborateur
+
+  type dossier:
+    relations:
+      - proprietaire:
+        - relations: client#adherent
+      - gestionnaire:
+        - relations: client#collaborateur
+      - parent: 
+        - relations: kanalyse
+    roles:
+      - dataControllerReader:
+        - relations: dataController from parent
+          #condition à l'écriture dans le model
+          rules:
+            - id: 6bb6f839-61d5-4968-9fa1-87383df1344d
+              params:
+                idDossier: object_id
+                isConfidentiel: 'false'
+        #condition à la lecture
+        policy: 
+          - name: dossier_can_read
+            resource: qfq.dossier
+            action: select
+            attributes: true
+            conditions:
+              - id: object_id
+      - reader:
+        - relations: proprietaire
+        - relations: gestionnaire
+        policy: 
+          - name: dossier_can_read_all
+            resource: qfq.dossier
+            rules: true
+            action: select
+            conditions:
+              - id: object_id

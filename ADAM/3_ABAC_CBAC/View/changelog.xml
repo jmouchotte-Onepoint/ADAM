@@ -1,0 +1,27 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/3_ABAC_CBAC/VIEW/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="ABAC-VIEW-ATTRIBUTES-RELATIONS">
+        <comment>ABAC : Création de la vue pour associer tous les attributs aux relations</comment>
+        <sqlFile path="ABAC-VIEW-ATTRIBUTES-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="ABAC-VIEW-ATTRIBUTES-ROLES">
+        <comment>ABAC : Création de la vue pour associer tous les attributs aux rôles avec les ceux héritées d'un parent</comment>
+        <sqlFile path="ABAC-VIEW-ATTRIBUTES-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="ABAC-VIEW-ATTRIBUTES-PERMISSIONS">
+        <comment>ABAC : Création de la vue pour associer tous les attributs aux permissions avec les ceux héritées d'un parent</comment>
+        <sqlFile path="ABAC-VIEW-ATTRIBUTES-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="ABAC-VIEW-ATTRIBUTES-ALL">
+        <comment>ABAC : Création d'une vue global des trois précedents pour avoir une seul source pour la validation // fn_check_all_attributes_from_view</comment>
+        <sqlFile path="ABAC-VIEW-ATTRIBUTES-ALL.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

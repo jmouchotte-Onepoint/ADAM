@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/5_DEV_TEST/changelog.xml">
+
+    <!-- ADAM x DATABASE x QFQ MODELS !-->
+    <changeSet author="noMemoryLeak" id="DEV-0001-INIT-DOSSIER" context="dev">
+        <comment>DEV : Insertion des dossiers pour QFQ</comment>
+        <sqlFile path="DEV-0001-INIT-DOSSIER.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="DEV-0002-INIT-DB-USER" context="dev">
+        <comment>DEV : Creation de l'utilisateur adam_test</comment>
+        <sqlFile path="DEV-0002-INIT-DB-USER.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <!-- ADAM -->
+    <changeSet author="noMemoryLeak" id="ADAM-0001-ADD-RELATIONS" context="dev">
+        <comment>DEV : Peuplage du contaxt rebac en mode de test</comment>
+        <sqlFile path="ADAM-0001-ADD-RELATIONS.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog>

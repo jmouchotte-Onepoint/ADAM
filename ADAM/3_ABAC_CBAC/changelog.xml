@@ -1,0 +1,26 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/3_ABAC_CBAC/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="ABAC-ATTRIBUTES-RELATIONS">
+        <comment>ABAC : Création de la table association relations - rules_attributes</comment>
+        <sqlFile path="ABAC-ATTRIBUTES-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="ABAC-ATTRIBUTES-ROLES">
+        <comment>ABAC : Création de la table association roles - rules_attributes</comment>
+        <sqlFile path="ABAC-ATTRIBUTES-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="ABAC-ATTRIBUTES-PERMISSIONS">
+        <comment>ABAC : Création de la table association permissions - rules_attributes</comment>
+        <sqlFile path="ABAC-ATTRIBUTES-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <include file="ADAM/3_ABAC_CBAC/Function/changelog.xml"/>
+    <include file="ADAM/3_ABAC_CBAC/Policy/changelog.xml"/>
+    <include file="ADAM/3_ABAC_CBAC/View/changelog.xml"/>
+
+</databaseChangeLog>

@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/1_REBAC_RBAC/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="REBAC-MODEL">
+        <comment>REBAC : Création de la table pour stocker les règles</comment>
+        <sqlFile path="REBAC-MODEL.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-RELATIONS">
+        <comment>REBAC : Création de la table pour les relations</comment>
+        <sqlFile path="REBAC-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-ROLES">
+        <comment>REBAC : Création de la table pour les roles</comment>
+        <sqlFile path="REBAC-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-PERMISSIONS">
+        <comment>REBAC : Création de la table pour les permissions</comment>
+        <sqlFile path="REBAC-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <include file="ADAM/1_REBAC_RBAC/Recursive/changelog.xml"/>
+    <include file="ADAM/1_REBAC_RBAC/Function/changelog.xml"/>
+    <include file="ADAM/1_REBAC_RBAC/Trigger/changelog.xml"/>
+    <include file="ADAM/1_REBAC_RBAC/Policy/changelog.xml"/>
+
+</databaseChangeLog>
