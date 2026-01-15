@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/2_RUBAC/POLICY/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="RUBAC-POLICY-RULES-ADD-RLS">
+        <comment>POLICY-RUBAC : Activation des RLS pour les associées aux règles dynamiques</comment>
+        <sqlFile path="RUBAC-POLICY-RULES-ADD-RLS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-POLICY-RULES-MODEL">
+        <comment>POLICY-RUBAC : Création d'une table pour ajouter des règles sur la création d'une relation selon une règle du model</comment>
+        <sqlFile path="RUBAC-POLICY-RULES-MODEL.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-POLICY-RULES-RELATIONS">
+        <comment>POLICY-RUBAC : Création d'un table pour limiter les accès en lecture pour les relations</comment>
+        <sqlFile path="RUBAC-POLICY-RULES-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-POLICY-RULES-ROLES">
+        <comment>POLICY-RUBAC : Création d'un table pour limiter les accès en lecture pour les rôles</comment>
+        <sqlFile path="RUBAC-POLICY-RULES-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-POLICY-RULES-PERMISSIONS">
+        <comment>POLICY-RUBAC : Création d'un table pour limiter les accès en lecture pour les permissions</comment>
+        <sqlFile path="RUBAC-POLICY-RULES-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

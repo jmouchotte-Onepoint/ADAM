@@ -1,0 +1,103 @@
+tenants:
+  - id: tenant_01
+    name: My_Tenant_01
+    description: Tenant principale pour les tests
+  - id: tenant_02
+    name: My_Tenant_02
+    description: Tenant secondaire pour montreer l'isolation
+
+models:
+  type parcours:
+    relations:
+      - patient:
+        - relations: users
+      - referent:
+        - relations: users
+    roles:
+      - reader:
+          - relations: referent
+          - relations: patient
+    permissions:
+      - can_read:
+          - roles: reader
+          
+  type etapes:
+    relations:
+      - invite: 
+        - relations: users
+      - parent:
+        - relations: parcours    
+      - responsable:
+        - relations: users#doctor
+    roles:
+      - reader:
+        - relations: responsable
+        - relations: invite
+        - roles: reader from parent
+    permissions:
+      - can_read:
+        - roles: reader 
+        policy: 
+          - name: etapes_can_read
+            resource: parcours.etapes
+            object_type: etapes
+            action: select
+            conditions:
+              - id: like 'parcours-%'
+              - id: object_id
+              
+  type fiches:
+    relations:
+      - invite:
+        - relations: users
+      - parent:
+        - relations: etapes
+    permissions:
+      - can_edit:
+        - relations: responsable from parent
+      - can_read:
+        - relations: invite
+        - roles: reader from parent
+
+  type containers:
+    relations:
+      - owner: 
+        - relations: users
+      - etapes:
+        - relations: etapes
+      - parent:
+        - relations: parcours
+    roles:
+      - reader:
+        - relations: referent from parent
+        - relations: owner
+    permissions:
+      - can_write:
+        - relations: owner
+        - relations: referent from parent
+        - relations: responsable from etapes
+
+  type documents:
+    relations:
+      - invite:
+        - relations: users
+      - owner: 
+        - relations: users
+      - parent:
+        - relations: containers
+      - etapes:
+        - relations: etapes
+    permissions:
+      - can_delete:
+        - relations: owner from parent
+      - can_download:
+        - relations: owner
+        - relations: responsable from etapes
+        - roles: reader from parent
+      - can_read: 
+        - relations: invite
+        - relations: owner
+        - roles: reader from parent
+        - roles: reader from etapes
+      - can_share:
+        - relations: owner from parent

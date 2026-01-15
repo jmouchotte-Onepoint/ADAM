@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/0_INIT/RULES/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="INIT-GET-TENANT-ID">
+        <comment>INIT : Fonction safe pour récupérer le tenant dans les RLS</comment>
+        <sqlFile path="INIT-GET-TENANT-ID.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="INIT-GET-USER-INFOS">
+        <comment>INIT : Fonction safe pour récupérer les infos de session d'un pg_user</comment>
+        <sqlFile path="INIT-GET-USER-INFOS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

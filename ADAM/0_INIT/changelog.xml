@@ -1,0 +1,25 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/0_TENANT/changelog.xml">
+
+
+    <changeSet author="noMemoryLeak" id="INIT-CREATE-SCHEMA">
+        <comment>INIT : Création du schéma ADAM</comment>
+        <sqlFile path="INIT-CREATE-SCHEMA.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="TENANTS">
+        <comment>INIT : Création des tables pour faire du multitenant</comment>
+        <sqlFile path="INIT-TENANTS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="PG-USER">
+        <comment>INIT : Ajout des attributs pour le users qui va initier le schema</comment>
+        <sqlFile path="INIT-VALUES-PG-USER.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <include file="ADAM/0_INIT/Function/changelog.xml" />
+
+</databaseChangeLog>

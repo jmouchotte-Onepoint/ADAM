@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/2_RUBAC/FUNCTION/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="RUBAC-FUNC-CHECK-DYNAMIC-RULES">
+        <comment>RUBAC : Création de la table pour les règles complexes via des attributs</comment>
+        <sqlFile path="RUBAC-FUNC-CHECK-DYNAMIC-RULES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-FUNC-CHECK-ALL-RULES-FROM-VIEW">
+        <comment>RUBAC : Function de validation des règles depuis la vue triple </comment>
+        <sqlFile path="RUBAC-FUNC-CHECK-ALL-RULES-FROM-VIEW.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-FUNC-TRIGGER-CHECK-RULES-FROM-MODEL-RULES">
+        <comment>RUBAC : Modification de la fonction REBAC si utilisation du modèle RUBAC pour ADAM</comment>
+        <sqlFile path="RUBAC-FUNC-TRIGGER-CHECK-RULES-FROM-MODEL-RULES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

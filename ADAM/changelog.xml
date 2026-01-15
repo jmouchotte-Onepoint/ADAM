@@ -1,0 +1,14 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/changelog.xml">
+
+    <include file="ADAM/0_INIT/changelog.xml" />
+    <include file="ADAM/1_REBAC_RBAC/changelog.xml" />
+    <include file="ADAM/2_RUBAC/changelog.xml" />
+    <include file="ADAM/3_ABAC_CBAC/changelog.xml" />
+    <include file="ADAM/4_INSERT/changelog.xml" />
+    <include file="ADAM/5_DEV_TEST/changelog.xml" context="dev"/>
+
+</databaseChangeLog>

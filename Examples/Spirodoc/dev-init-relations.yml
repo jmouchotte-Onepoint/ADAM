@@ -1,0 +1,121 @@
+tenant_01:
+  #Parcours
+  #Users
+  - user: "users:effecteur-med-1"
+    relation: "referent"
+    object: "parcours:parcours-patient-1"  
+  - user: "users:patient-1"
+    relation: "patient"
+    object: "parcours:parcours-patient-1"
+  #Etapes
+  - user: "parcours:parcours-patient-1"
+    relation: "parent"
+    object: "etapes:parcours-patient-1-etape-1"
+  - user: "parcours:parcours-patient-1"
+    relation: "parent"
+    object: "etapes:parcours-patient-1-etape-2"
+  #Containers
+  - user: "parcours:parcours-patient-1"
+    relation: "parent"
+    object: "containers:containers-parcours-patient-1"
+
+  #Containers
+  #User
+  - user: "users:patient-1"
+    relation: "owner"
+    object: "containers:containers-parcours-patient-1"
+  # Document
+  - user: "containers:containers-parcours-patient-1"
+    relation: "parent"
+    object: "documents:objet-fiche-generique-biologique-patient-1-etape-1"  
+  - user: "containers:containers-parcours-patient-1"
+    relation: "parent"
+    object: "documents:objet-fiche-generique-clinique-patient-1-etape-1"
+  - user: "containers:containers-parcours-patient-1"
+    relation: "parent"
+    object: "documents:objet-fiche-generique-qdv-patient-1-etape-1"
+  - user: "containers:containers-parcours-patient-1"
+    relation: "parent"
+    object: "documents:objet-fiche-generique-biologique-patient-1-etape-2"
+  - user: "containers:containers-parcours-patient-1"
+    relation: "parent"
+    object: "documents:objet-fiche-generique-clinique-patient-1-etape-2"
+  - user: "containers:containers-parcours-patient-1"
+    relation: "parent"
+    object: "documents:objet-fiche-generique-qdv-patient-1-etape-2"
+
+  #Parcours 1
+  #Etape 1
+  #User
+  - user: "users:effecteur-med-1"
+    relation: "responsable"
+    object: "etapes:parcours-patient-1-etape-1"
+  #Container
+  - user: "etapes:parcours-patient-1-etape-1"
+    relation: "etapes"
+    object: "containers:containers-parcours-patient-1"
+  #Fiche
+  - user: "etapes:parcours-patient-1-etape-1"
+    relation: "parent"
+    object: "fiches:fiche-generique-clinique-patient-1-etape-1"
+  - user: "etapes:parcours-patient-1-etape-1"
+    relation: "parent"
+    object: "fiches:fiche-generique-qdv-patient-1-etape-1"
+  - user: "etapes:parcours-patient-1-etape-1"
+    relation: "parent"
+    object: "fiches:fiche-generique-biologique-patient-1-etape-1"
+  #Document
+  - user: "etapes:parcours-patient-1-etape-1"
+    relation: "etapes"
+    object: "documents:objet-fiche-generique-biologique-patient-1-etape-1"
+  - user: "etapes:parcours-patient-1-etape-1"
+    relation: "etapes"
+    object: "documents:objet-fiche-generique-clinique-patient-1-etape-1"           
+  - user: "etapes:parcours-patient-1-etape-1"
+    relation: "etapes"
+    object: "documents:objet-fiche-generique-qdv-patient-1-etape-1"
+
+  #Parcours 1
+  #Etape 2
+  #User
+  - user: "users:effecteur-inf-1"
+    relation: "responsable"
+    object: "etapes:parcours-patient-1-etape-2"
+  #Container
+  - user: "etapes:parcours-patient-1-etape-2"
+    relation: "etapes"
+    object: "containers:containers-parcours-patient-1"
+  #Fiche
+  - user: "etapes:parcours-patient-1-etape-2"
+    relation: "parent"
+    object: "fiches:fiche-generique-biologique-patient-1-etape-2"  
+  - user: "etapes:parcours-patient-1-etape-2"
+    relation: "parent"
+    object: "fiches:fiche-generique-clinique-patient-1-etape-2"
+  - user: "etapes:parcours-patient-1-etape-2"
+    relation: "parent"
+    object: "fiches:fiche-generique-qdv-patient-1-etape-2"
+  #Document
+  - user: "etapes:parcours-patient-1-etape-2"
+    relation: "etapes"
+    object: "documents:objet-fiche-generique-biologique-patient-1-etape-2"
+  - user: "etapes:parcours-patient-1-etape-2"
+    relation: "etapes"
+    object: "documents:objet-fiche-generique-clinique-patient-1-etape-2"
+  - user: "etapes:parcours-patient-1-etape-2"
+    relation: "etapes"
+    object: "documents:objet-fiche-generique-qdv-patient-1-etape-2"
+
+  #User
+  #Fiche
+  - user: "users:patient-2"
+    relation: "invite"
+    object: "fiches:fiche-generique-biologique-patient-1-etape-2"
+  #Document
+  - user: "users:effecteur-inf-1"
+    relation: "owner"
+    object: "documents:objet-fiche-generique-biologique-patient-1-etape-2"
+  - user: "users:effecteur-inf-1"
+    relation: "owner"
+    object: "documents:objet-fiche-generique-clinique-patient-1-etape-2"
+

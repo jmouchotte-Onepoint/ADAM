@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/2_RUBAC/TRIGGER/changelog.xml">
+        
+    <changeSet author="noMemoryLeak" id="RUBAC-TRIGGER-RULES-RELATIONS">
+        <comment>RUBAC : Trigger pour interdir la creation de relations si des rules sont sur le model</comment>
+        <sqlFile path="RUBAC-TRIGGER-RULES-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="RUBAC-TRIGGER-RULES-ROLES">
+        <comment>RUBAC : Trigger pour interdir la creation des rôles si des rules sont sur le model</comment>
+        <sqlFile path="RUBAC-TRIGGER-RULES-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    
+</databaseChangeLog>

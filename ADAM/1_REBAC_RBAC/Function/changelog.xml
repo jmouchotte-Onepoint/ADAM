@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/1_REBAC_RBAC/FUNCTION/changelog.xml">
+
+    <changeSet author="noMemoryLeak" id="REBAC-FUNC-CHECK-MODEL-CONDITION">
+        <comment>REBAC : Fonction pour valider la condition de création selon grammaire #</comment>
+        <sqlFile path="REBAC-FUNC-CHECK-MODEL-CONDITION.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    
+    <changeSet author="noMemoryLeak" id="REBAC-FUNC-EXPIRATION-DATE">
+        <comment>REBAC : Initalise PGCron pour supprimer toute les heures les roles temporaires</comment>
+        <sqlFile path="REBAC-FUNC-EXPIRATION-DATE.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-FUNC-SET-MODEL-ID">
+        <comment>REBAC : Initalise le model-Id pour les insertions directs</comment>
+        <sqlFile path="REBAC-FUNC-TRIGGER-SET-MODEL-ID.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    
+</databaseChangeLog>

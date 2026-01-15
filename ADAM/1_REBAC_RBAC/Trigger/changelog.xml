@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/1_REBAC_RBAC/TRIGGER/changelog.xml">
+        
+    <changeSet author="noMemoryLeak" id="REBAC-TRIGGER-RELATIONS">
+        <comment>REBAC : Trigger pour la création automatique des permissions par l'ajout d'une relation</comment>
+        <sqlFile path="REBAC-TRIGGER-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-TRIGGER-ROLES">
+        <comment>REBAC : Trigger pour la création automatique des permissions par l'ajout d'une relation</comment>
+        <sqlFile path="REBAC-TRIGGER-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+    
+</databaseChangeLog>

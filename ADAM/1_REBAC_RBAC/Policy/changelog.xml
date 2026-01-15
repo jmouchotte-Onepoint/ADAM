@@ -1,0 +1,27 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/1_REBAC_RBAC/POLICY/changelog.xml">
+    
+    <changeSet author="noMemoryLeak" id="REBAC-POLICY-ADD-RLS">
+        <comment>REBAC : Activation des RLS pour les tables centrales du modeles</comment>
+        <sqlFile path="REBAC-POLICY-ADD-RLS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-POLICY-RELATIONS">
+        <comment>REBAC : Activation pour select,insert et delete sur la table relations</comment>
+        <sqlFile path="REBAC-POLICY-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-POLICY-ROLES">
+        <comment>REBAC : Activation pour select,insert et delete sur la table roles</comment>
+        <sqlFile path="REBAC-POLICY-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-POLICY-PERMISSIONS">
+        <comment>REBAC : Activation pour select,insert et delete sur la table permissions</comment>
+        <sqlFile path="REBAC-POLICY-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

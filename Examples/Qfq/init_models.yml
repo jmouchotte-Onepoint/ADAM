@@ -1,0 +1,52 @@
+tenants:
+  - id: tenantA
+    name: My_Tenant_A
+    description: Tenant principale pour les tests
+  - id: tenantB
+    name: My_Tenant_B
+    description: Tenant secondaire pour montreer l'isolation
+
+models: 
+  type client:
+    relations:
+      - collaborateur:
+        - relations: users
+      - adherent:
+        - relations: users
+
+  type kanalyse:
+    roles:
+      - dataController:
+        - relations: client#collaborateur
+        policy:
+          - name: dossier_can_read_public
+            resource: qfq.dossier
+            action: select
+            conditions:
+              - is_confidentiel: false
+              - tenant: tenant_id
+      - statistique:
+        - relations: client#collaborateur
+      - admin:
+        - relations: client#collaborateur
+
+  type dossier:
+    relations:
+      - proprietaire:
+        - relations: client#adherent
+      - gestionnaire:
+        - relations: client#collaborateur
+      - comptable:
+        - relations: client#collaborateur
+    roles:
+      - reader:
+        - relations: proprietaire
+        - relations: gestionnaire
+        - relations: comptable
+        policy:
+          - name: dossier_can_read
+            resource: qfq.dossier
+            action: select
+            conditions:
+              - id: object_id
+              - tenant: tenant_id

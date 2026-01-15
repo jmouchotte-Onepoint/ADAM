@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/1_REBAC_RBAC/RECURSIVE/changelog.xml">
+    
+    <changeSet author="noMemoryLeak" id="REBAC-RECURSIVE-INSERT">
+        <comment>REBAC : Fonction pour la création des rôles et permissions avec trigger</comment>
+        <sqlFile path="REBAC-RECURSIVE-INSERT.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-RECURSIVE-UPDATE">
+        <comment>REBAC : Fonction pour mettre à jour si le model à évoluer</comment>
+        <sqlFile path="REBAC-RECURSIVE-UPDATE.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>
