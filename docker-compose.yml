@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:18.0-alpine3.22
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: adamdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d adamdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+        - ./docker/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+
+  liquibase:
+    image : liquibase/liquibase:4.32.0
+    environment:
+      LIQUIBASE_COMMAND_USERNAME: postgres
+      LIQUIBASE_COMMAND_PASSWORD: postgres
+      LIQUIBASE_COMMAND_URL: jdbc:postgresql://postgres:5432/adamdb
+      LIQUIBASE_COMMAND_CHANGELOG_FILE: changelog.xml
+    volumes:
+      - ./ADAM:/liquibase/ADAM
+      - ./ADAM/changelog.xml:/liquibase/changelog.xml
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # lance automatiquement la migration
+    command: ["update"]

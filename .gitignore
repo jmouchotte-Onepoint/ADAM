@@ -1,0 +1,61 @@
+# Fichiers compilés Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environnements virtuels
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Fichiers de log
+*.log
+
+# Caches et fichiers temporaires
+*.sqlite3
+*.db
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+
+# Sorties de tests
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+*.hypothesis/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+MANIFEST
+
+# PyInstaller
+*.spec
+
+# IDE / éditeurs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Configuration de l'application
+/*.json
+/ADAM/4_INSERT/*.sql
+/ADAM/5_DEV_TEST/*.sql
+/ADAM/5_DEV_TEST/*.xml
+/Docker/postgres/docker-entrypoint-initdb.d/*.sql
+/TMP
