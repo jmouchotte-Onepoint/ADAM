@@ -1,9 +1,9 @@
 -- 1. Initialisation pour set up la récursivitée
-CREATE OR REPLACE FUNCTION adam.fn_insert_roles_permissions_from_relation() 
+CREATE OR REPLACE FUNCTION fn_insert_roles_permissions_from_relation() 
 RETURNS TRIGGER AS $$
 BEGIN
     -- Appel de la fonction helper avec PERFORM
-    PERFORM adam.fn_recursive_insert_roles_permissions(
+    PERFORM fn_recursive_insert_roles_permissions(
         NEW.deep,
         NEW.id,
         NEW.user_type,
@@ -23,18 +23,26 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- 2. Créer le trigger recursif
-DROP TRIGGER IF EXISTS trg_relations_after_insert_01_roles_permissions ON adam.relations;
+DROP TRIGGER IF EXISTS trg_relations_after_insert_01_roles_permissions ON relations;
 
 CREATE TRIGGER trg_relations_after_insert_01_roles_permissions
-AFTER INSERT ON adam.relations
+AFTER INSERT ON relations
 FOR EACH ROW
 WHEN (NEW.is_auto_generated = FALSE)
-EXECUTE FUNCTION adam.fn_insert_roles_permissions_from_relation();
+EXECUTE FUNCTION fn_insert_roles_permissions_from_relation();
 
 -- 3. Créer le trigger pour set tup
-DROP TRIGGER IF EXISTS trg_relations_before_insert_01_set_model_id ON adam.relations;
+DROP TRIGGER IF EXISTS trg_relations_before_insert_01_set_model_id ON relations;
 
 CREATE TRIGGER trg_relations_before_insert_01_set_model_id
-BEFORE INSERT OR UPDATE ON adam.relations
+BEFORE INSERT OR UPDATE ON relations
 FOR EACH ROW
-EXECUTE FUNCTION adam.fn_trigger_set_model_id();
+EXECUTE FUNCTION fn_trigger_set_model_id();
+
+-- 4. Créer le trigger pour auto-peupler condition_relation_id
+DROP TRIGGER IF EXISTS trg_relations_before_insert_02_set_condition_relation_id ON relations;
+
+CREATE TRIGGER trg_relations_before_insert_02_set_condition_relation_id
+BEFORE INSERT ON relations
+FOR EACH ROW
+EXECUTE FUNCTION fn_trigger_set_relations_condition_relation_id();

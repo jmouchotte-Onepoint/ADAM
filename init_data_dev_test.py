@@ -1,4 +1,4 @@
-from Resources.write_sql import write_sql_data_relations
+from Resources.write_sql import write_sql_data_relations, write_sql_data_roles
 def insertRelations(data,rebac_dev_test_file):
 
     for tenant_id in data :
@@ -10,5 +10,9 @@ def insertRelations(data,rebac_dev_test_file):
             object_type, object_id = obj.split(":", 1)
             user_type, user_id = user.split(":", 1)
 
-            write_sql_data_relations(rebac_dev_test_file, user_type, user_id, relation, object_type, object_id, tenant_id, entry.get('type','relations'));
+            entry_type = entry.get('type', 'relations')
+            if entry_type == 'roles':
+                write_sql_data_roles(rebac_dev_test_file, user_type, user_id, relation, object_type, object_id, tenant_id)
+            else:
+                write_sql_data_relations(rebac_dev_test_file, user_type, user_id, relation, object_type, object_id, tenant_id, entry_type);
 

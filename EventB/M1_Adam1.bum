@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.core.generated="false" org.eventb.texttools.text_lastmodified="1783448153193" org.eventb.texttools.text_representation="machine M1_Adam1 refines M1_Adam  sees Test_Valid_Context&#10;&#10;variables can_access query_type_state query_auth_state current_qtype current_user current_datas current_tenant&#10;&#10;events&#10;  event INITIALISATION extends INITIALISATION&#10;  end&#10;&#10;  event ValidateData extends ValidateData&#10;  end&#10;&#10;  event ValidateQuery extends ValidateQuery&#10;  end&#10;&#10;  event AddData extends AddData&#10;  end&#10;&#10;  event RejectDataNotAllowed extends RejectDataNotAllowed&#10;  end&#10;&#10;  event RejectDataForbidden extends RejectDataForbidden&#10;  end&#10;&#10;  event RejectQueryType extends RejectQueryType&#10;  end&#10;end&#10;" version="5">
+    <org.eventb.core.refinesMachine name="'" org.eventb.core.target="M1_Adam"/>
+    <org.eventb.core.seesContext name="_4_oBYHovEfGKZuMSBPtNMg" org.eventb.core.target="Test_Valid_Context"/>
+    <org.eventb.core.variable name="_7MlegjJtEfG2G5JkHksYrA" org.eventb.core.generated="false" org.eventb.core.identifier="can_access"/>
+    <org.eventb.core.variable name="_DaETsHnzEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.identifier="query_type_state"/>
+    <org.eventb.core.variable name="_FK0UQi5zEfGuwaioRYFjWA" org.eventb.core.generated="false" org.eventb.core.identifier="query_auth_state"/>
+    <org.eventb.core.variable name="_sAub8y0VEfGozNJR55fhdA" org.eventb.core.generated="false" org.eventb.core.identifier="current_qtype"/>
+    <org.eventb.core.variable name="_f7rukC_7EfGpDsLhkA56BQ" org.eventb.core.generated="false" org.eventb.core.identifier="current_user"/>
+    <org.eventb.core.variable name="_sAub_i0VEfGozNJR55fhdA" org.eventb.core.generated="false" org.eventb.core.identifier="current_datas"/>
+    <org.eventb.core.variable name="_kHwFgHotEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.identifier="current_tenant"/>
+    <org.eventb.core.event name="_sAub_i0VEfGozNJR55fhdB" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.generated="false" org.eventb.core.label="INITIALISATION"/>
+    <org.eventb.core.event name="_sAub_i0VEfGozNJR55fhdC" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.generated="false" org.eventb.core.label="ValidateData">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="ValidateData"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="_sAub_i0VEfGozNJR55fhdD" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.generated="false" org.eventb.core.label="ValidateQuery">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="ValidateQuery"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="_sAub_i0VEfGozNJR55fhdE" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.generated="false" org.eventb.core.label="AddData">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="AddData"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="_sAub_i0VEfGozNJR55fhdF" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.generated="false" org.eventb.core.label="RejectDataNotAllowed">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="RejectDataNotAllowed"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="_sAub_i0VEfGozNJR55fhdG" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.generated="false" org.eventb.core.label="RejectDataForbidden">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="RejectDataForbidden"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="_sAub_i0VEfGozNJR55fhdH" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.generated="false" org.eventb.core.label="RejectQueryType">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="RejectQueryType"/>
+    </org.eventb.core.event>
+</org.eventb.core.machineFile>

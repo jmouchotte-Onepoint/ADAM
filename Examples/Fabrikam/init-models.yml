@@ -1,0 +1,39 @@
+tenants:
+  - id: fabrikam
+    name: FABRIKAM
+    description: Tenant unique pour Fabrikam
+
+models:
+  type organisation:
+    relations:
+      - membre:
+        - relations: utilisateur
+    roles:
+      - admin:
+        - relations: utilisateur#membre
+      - gestionnaire:
+        - relations: utilisateur#membre
+      - integrateur:
+        - relations: utilisateur#membre
+      - valideur_identite:
+        - relations: utilisateur#membre
+
+  type entreprise:
+    relations:
+      - gere:
+        - relations: organisation
+      - salarie:
+        - relations: utilisateur
+      - contact:
+        - relations: utilisateur
+    roles:
+      - admin:
+        - relations: utilisateur#salarie
+      - gestionnaire:
+        - relations: utilisateur#salarie
+      - signataire:
+        - relations: utilisateur#salarie
+      - integrateur:
+        - relations: utilisateur#salarie
+      - valideur_identite:
+        - relations: utilisateur#salarie

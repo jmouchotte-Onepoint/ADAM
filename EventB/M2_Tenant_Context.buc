@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.core.generated="false" org.eventb.texttools.text_lastmodified="1783447237675" org.eventb.texttools.text_representation="context M2_Tenant_Context extends M1_Metadatas_Context&#10;&#10;sets&#10;  TENANTS&#10;&#10;constants&#10;  tenant_user&#10;  tenant_data&#10;  tenant_auth&#10;&#10;axioms&#10;  @axm_tenant_user_fun;  tenant_user ∈ USERS → TENANTS&#10;  @axm_tenant_data_fun;  tenant_data ∈ DATAS → TENANTS&#10;  @axm_tenant_auth_fun;  tenant_auth ∈ AUTHORIZATIONS → TENANTS&#10;&#10;end&#10;&#10;&#10;" version="3">
+    <org.eventb.core.extendsContext name="_AmM4kHotEfGKZuMSBPtNMg" org.eventb.core.target="M1_Metadatas_Context"/>
+    <org.eventb.core.carrierSet name="_AmM4kXotEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.identifier="TENANTS"/>
+    <org.eventb.core.constant name="_AmM4knotEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.identifier="tenant_user"/>
+    <org.eventb.core.constant name="_AmM4k3otEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.identifier="tenant_data"/>
+    <org.eventb.core.constant name="_AmNfoHotEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.identifier="tenant_auth"/>
+    <org.eventb.core.axiom name="_AmNfonotEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.label="axm_tenant_user_fun;" org.eventb.core.predicate="tenant_user ∈ USERS → TENANTS"/>
+    <org.eventb.core.axiom name="_AmNfo3otEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.label="axm_tenant_data_fun;" org.eventb.core.predicate="tenant_data ∈ DATAS → TENANTS"/>
+    <org.eventb.core.axiom name="_AmNfpHotEfGKZuMSBPtNMg" org.eventb.core.generated="false" org.eventb.core.label="axm_tenant_auth_fun;" org.eventb.core.predicate="tenant_auth ∈ AUTHORIZATIONS → TENANTS"/>
+</org.eventb.core.contextFile>

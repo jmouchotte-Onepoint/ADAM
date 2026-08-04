@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="1">
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poIdentifier name="OPERATOR" org.eventb.core.type="ℙ(OPERATOR)"/>
+        <org.eventb.core.poIdentifier name="STATE" org.eventb.core.type="ℙ(STATE)"/>
+        <org.eventb.core.poIdentifier name="INSTRUCTIONS" org.eventb.core.type="ℙ(INSTRUCTIONS)"/>
+        <org.eventb.core.poIdentifier name="JOIN_TYPE" org.eventb.core.type="ℙ(JOIN_TYPE)"/>
+        <org.eventb.core.poIdentifier name="LEFT" org.eventb.core.type="JOIN_TYPE"/>
+        <org.eventb.core.poIdentifier name="EQ" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="IN" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="SELECT" org.eventb.core.type="INSTRUCTIONS"/>
+        <org.eventb.core.poIdentifier name="BETWEEN" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="INNER" org.eventb.core.type="JOIN_TYPE"/>
+        <org.eventb.core.poIdentifier name="VALID" org.eventb.core.type="STATE"/>
+        <org.eventb.core.poIdentifier name="RIGHT" org.eventb.core.type="JOIN_TYPE"/>
+        <org.eventb.core.poIdentifier name="REJECTED" org.eventb.core.type="STATE"/>
+        <org.eventb.core.poIdentifier name="PENDING" org.eventb.core.type="STATE"/>
+        <org.eventb.core.poIdentifier name="LIKE" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="INSERT" org.eventb.core.type="INSTRUCTIONS"/>
+        <org.eventb.core.poPredicate name="INSTRUCTIONT" org.eventb.core.predicate="partition(STATE,{PENDING},{VALID},{REJECTED})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_dqa4az5mEfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poPredicate name="INSTRUCTIONU" org.eventb.core.predicate="partition(OPERATOR,{LIKE},{BETWEEN},{IN},{EQ})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_dqbfcD5mEfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poPredicate name="INSTRUCTIONV" org.eventb.core.predicate="partition(JOIN_TYPE,{LEFT},{RIGHT},{INNER})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_dqbfcT5mEfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poPredicate name="INSTRUCTIONW" org.eventb.core.predicate="partition(INSTRUCTIONS,{SELECT},{INSERT})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_zV1b8j5mEfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poIdentifier name="QUERY_CONDITIONS" org.eventb.core.type="ℙ(QUERY_CONDITIONS)"/>
+        <org.eventb.core.poIdentifier name="USERS" org.eventb.core.type="ℙ(USERS)"/>
+        <org.eventb.core.poIdentifier name="METADATAS" org.eventb.core.type="ℙ(METADATAS)"/>
+        <org.eventb.core.poIdentifier name="DATAS" org.eventb.core.type="ℙ(DATAS)"/>
+        <org.eventb.core.poIdentifier name="AUTHORIZATIONS" org.eventb.core.type="ℙ(AUTHORIZATIONS)"/>
+        <org.eventb.core.poIdentifier name="fn_query_conds_val" org.eventb.core.type="ℙ(QUERY_CONDITIONS×METADATAS)"/>
+        <org.eventb.core.poIdentifier name="fn_auth_metadatas" org.eventb.core.type="ℙ(AUTHORIZATIONS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="query_type" org.eventb.core.type="INSTRUCTIONS"/>
+        <org.eventb.core.poIdentifier name="fn_datas_metadatas" org.eventb.core.type="ℙ(DATAS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="fn_auth_metadatas_to_cond_metadatas" org.eventb.core.type="ℙ(AUTHORIZATIONS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="fn_datas_metadatas_to_auth_metadatas" org.eventb.core.type="ℙ(DATAS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="set_allowed_data" org.eventb.core.type="ℙ(DATAS)"/>
+        <org.eventb.core.poIdentifier name="fn_auth_metadatas_to_user_metadatas" org.eventb.core.type="ℙ(AUTHORIZATIONS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="fn_query_user_metadatas" org.eventb.core.type="ℙ(USERS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="fn_datas_metadatas_to_cond_metadatas" org.eventb.core.type="ℙ(DATAS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="query_user" org.eventb.core.type="USERS"/>
+        <org.eventb.core.poIdentifier name="allowed_query_type" org.eventb.core.type="ℙ(INSTRUCTIONS)"/>
+        <org.eventb.core.poIdentifier name="fn_datas_metadatas_to_user_metadatas" org.eventb.core.type="ℙ(DATAS×ℙ(METADATAS))"/>
+        <org.eventb.core.poIdentifier name="fn_auth_scope" org.eventb.core.type="ℙ(AUTHORIZATIONS×ℙ(DATAS×INSTRUCTIONS))"/>
+        <org.eventb.core.poIdentifier name="fn_auth_metadatas_to_data_metadatas" org.eventb.core.type="ℙ(AUTHORIZATIONS×ℙ(METADATAS))"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatat" org.eventb.core.predicate="set_allowed_data⊆DATAS" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_BWRZsC51EfGuwaioRYFjWA"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatau" org.eventb.core.predicate="query_user∈USERS" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_am4OAHnyEfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatav" org.eventb.core.predicate="query_type∈INSTRUCTIONS" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_jU2X0Hn_EfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadataw" org.eventb.core.predicate="allowed_query_type⊆INSTRUCTIONS" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_am5cIHnyEfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatax" org.eventb.core.predicate="allowed_query_type≠(∅ ⦂ ℙ(INSTRUCTIONS))" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_iyougHnyEfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatay" org.eventb.core.predicate="fn_query_conds_val∈QUERY_CONDITIONS → METADATAS" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_NauuEHn4EfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadataz" org.eventb.core.predicate="fn_auth_scope∈AUTHORIZATIONS → ℙ(DATAS × allowed_query_type)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_hk3rIHoDEfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadata{" org.eventb.core.predicate="fn_datas_metadatas∈set_allowed_data → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_pLf68S54EfGuwaioRYFjWA"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadata|" org.eventb.core.predicate="fn_datas_metadatas_to_user_metadatas∈set_allowed_data → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_AIPJMESCEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadata}" org.eventb.core.predicate="fn_datas_metadatas_to_cond_metadatas∈set_allowed_data → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_AIPwQESCEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadata~" org.eventb.core.predicate="fn_datas_metadatas_to_auth_metadatas∈set_allowed_data → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_AIPwQUSCEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb'" org.eventb.core.predicate="∀d⦂DATAS·d∈set_allowed_data⇒fn_datas_metadatas(d)=fn_datas_metadatas_to_user_metadatas(d)∪fn_datas_metadatas_to_cond_metadatas(d)∪fn_datas_metadatas_to_auth_metadatas(d)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_3MGX0ESFEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb(" org.eventb.core.predicate="∀d⦂DATAS·d∈dom(fn_datas_metadatas)⇒(fn_datas_metadatas_to_user_metadatas(d)∩fn_datas_metadatas_to_cond_metadatas(d))∪(fn_datas_metadatas_to_user_metadatas(d)∩fn_datas_metadatas_to_auth_metadatas(d))∪(fn_datas_metadatas_to_auth_metadatas(d)∩fn_datas_metadatas_to_cond_metadatas(d))=(∅ ⦂ ℙ(METADATAS))" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_cqOnYESgEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb)" org.eventb.core.predicate="fn_auth_metadatas∈AUTHORIZATIONS → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_hYwI4D72EfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb*" org.eventb.core.predicate="fn_auth_metadatas_to_user_metadatas∈AUTHORIZATIONS → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_M3FLoESIEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb+" org.eventb.core.predicate="fn_auth_metadatas_to_cond_metadatas∈AUTHORIZATIONS → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_M3FLoUSIEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb," org.eventb.core.predicate="fn_auth_metadatas_to_data_metadatas∈AUTHORIZATIONS → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_M3FLokSIEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb-" org.eventb.core.predicate="∀r⦂AUTHORIZATIONS·r∈AUTHORIZATIONS⇒fn_auth_metadatas(r)=fn_auth_metadatas_to_user_metadatas(r)∪fn_auth_metadatas_to_cond_metadatas(r)∪fn_auth_metadatas_to_data_metadatas(r)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_OWUw0ESIEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb." org.eventb.core.predicate="∀r⦂AUTHORIZATIONS·r∈dom(fn_auth_metadatas)⇒(fn_auth_metadatas_to_user_metadatas(r)∩fn_auth_metadatas_to_cond_metadatas(r))∪(fn_auth_metadatas_to_user_metadatas(r)∩fn_auth_metadatas_to_data_metadatas(r))∪(fn_auth_metadatas_to_data_metadatas(r)∩fn_auth_metadatas_to_cond_metadatas(r))=(∅ ⦂ ℙ(METADATAS))" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_IwjHMESgEfGwi_3Ax9CUZw"/>
+        <org.eventb.core.poPredicate name="fn_datas_metadatas_to_user_metadatb/" org.eventb.core.predicate="fn_query_user_metadatas∈USERS → ℙ(METADATAS)" org.eventb.core.source="/Adam/M1_Metadatas_Context.buc|org.eventb.core.contextFile#M1_Metadatas_Context|org.eventb.core.axiom#_oALwsDAgEfGpDsLhkA56BQ"/>
+        <org.eventb.core.poIdentifier name="TENANTS" org.eventb.core.type="ℙ(TENANTS)"/>
+        <org.eventb.core.poIdentifier name="tenant_auth" org.eventb.core.type="ℙ(AUTHORIZATIONS×TENANTS)"/>
+        <org.eventb.core.poIdentifier name="tenant_data" org.eventb.core.type="ℙ(DATAS×TENANTS)"/>
+        <org.eventb.core.poIdentifier name="tenant_user" org.eventb.core.type="ℙ(USERS×TENANTS)"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/Adam/M2_Tenant_Context.bpo|org.eventb.core.poFile#M2_Tenant_Context|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="1">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="tenant_user∈USERS → TENANTS" org.eventb.core.source="/Adam/M2_Tenant_Context.buc|org.eventb.core.contextFile#M2_Tenant_Context|org.eventb.core.axiom#_AmNfonotEfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="tenant_data∈DATAS → TENANTS" org.eventb.core.source="/Adam/M2_Tenant_Context.buc|org.eventb.core.contextFile#M2_Tenant_Context|org.eventb.core.axiom#_AmNfo3otEfGKZuMSBPtNMg"/>
+        <org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="tenant_auth∈AUTHORIZATIONS → TENANTS" org.eventb.core.source="/Adam/M2_Tenant_Context.buc|org.eventb.core.contextFile#M2_Tenant_Context|org.eventb.core.axiom#_AmNfpHotEfGKZuMSBPtNMg"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

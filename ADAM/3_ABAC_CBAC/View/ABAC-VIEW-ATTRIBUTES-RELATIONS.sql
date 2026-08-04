@@ -1,5 +1,5 @@
-CREATE OR REPLACE VIEW adam.view_relations_attributes AS
+CREATE OR REPLACE VIEW view_relations_attributes AS
 SELECT
      ra.relation_id AS id,
      ra.attribute
-FROM adam.relations_attributes AS ra;
+FROM relations_attributes AS ra;

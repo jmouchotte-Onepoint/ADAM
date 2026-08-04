@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd;de.prob.symbolic.ctxBase" org.eventb.core.generated="false" org.eventb.texttools.text_lastmodified="1783446937785" org.eventb.texttools.text_representation="context M0_Init_Context&#10;&#10;sets&#10;&#9;STATE&#10;&#9;OPERATOR&#10;&#9;JOIN_TYPE&#10;&#9;INSTRUCTIONS&#10;&#10;constants&#10;&#9;PENDING&#10;&#9;VALID&#10;&#9;REJECTED&#10;&#9;LIKE&#10;&#9;BETWEEN&#10;&#9;IN&#10;&#9;EQ&#10;&#9;LEFT&#10;&#9;RIGHT&#10;&#9;INNER&#10;&#9;SELECT&#10;&#9;INSERT&#10;&#10;axioms&#10;  @axm_state; partition(STATE, {PENDING}, {VALID}, {REJECTED})&#10;  @axm_operator; partition(OPERATOR, {LIKE}, {BETWEEN}, {IN}, {EQ})&#10;  @axm_join_type; partition(JOIN_TYPE, {LEFT}, {RIGHT}, {INNER})&#10;  @init_query_type; partition(INSTRUCTIONS, {SELECT}, {INSERT})&#10;end&#10;&#10;" version="3">
+    <org.eventb.core.constant name="_CI5J0CdsEfGfWNIodzSCBw" org.eventb.core.generated="false" org.eventb.core.identifier="PENDING"/>
+    <org.eventb.core.constant name="_CI6_ACdsEfGfWNIodzSCBw" org.eventb.core.generated="false" org.eventb.core.identifier="VALID"/>
+    <org.eventb.core.constant name="_CI6_ASdsEfGfWNIodzSCBw" org.eventb.core.generated="false" org.eventb.core.identifier="REJECTED"/>
+    <org.eventb.core.carrierSet name="_j38FECdxEfGfWNIodzSCBw" org.eventb.core.generated="false" org.eventb.core.identifier="STATE"/>
+    <org.eventb.core.carrierSet name="_dqa4YT5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="OPERATOR"/>
+    <org.eventb.core.carrierSet name="_dqa4Yj5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="JOIN_TYPE"/>
+    <org.eventb.core.constant name="_dqa4Yz5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="LIKE"/>
+    <org.eventb.core.constant name="_dqa4ZD5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="BETWEEN"/>
+    <org.eventb.core.constant name="_dqa4ZT5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="IN"/>
+    <org.eventb.core.constant name="_dqa4Zj5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="EQ"/>
+    <org.eventb.core.constant name="_dqa4Zz5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="LEFT"/>
+    <org.eventb.core.constant name="_dqa4aD5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="RIGHT"/>
+    <org.eventb.core.constant name="_dqa4aT5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="INNER"/>
+    <org.eventb.core.constant name="_zV1b8D5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="SELECT"/>
+    <org.eventb.core.constant name="_zV1b8T5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="INSERT"/>
+    <org.eventb.core.axiom name="_dqa4az5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.label="axm_state;" org.eventb.core.predicate="partition(STATE, {PENDING}, {VALID}, {REJECTED})"/>
+    <org.eventb.core.axiom name="_dqbfcD5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.label="axm_operator;" org.eventb.core.predicate="partition(OPERATOR, {LIKE}, {BETWEEN}, {IN}, {EQ})"/>
+    <org.eventb.core.axiom name="_dqbfcT5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.label="axm_join_type;" org.eventb.core.predicate="partition(JOIN_TYPE, {LEFT}, {RIGHT}, {INNER})"/>
+    <org.eventb.core.axiom name="_zV1b8j5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.label="init_query_type;" org.eventb.core.predicate="partition(INSTRUCTIONS, {SELECT}, {INSERT})"/>
+    <org.eventb.core.carrierSet name="_zV1b8z5mEfGBkNnRVg_R5Q" org.eventb.core.generated="false" org.eventb.core.identifier="INSTRUCTIONS"/>
+</org.eventb.core.contextFile>

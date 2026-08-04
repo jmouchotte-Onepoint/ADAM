@@ -20,6 +20,6 @@
         <sqlFile path="INIT-VALUES-PG-USER.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <include file="ADAM/0_INIT/Function/changelog.xml" />
+    <include file="Function/changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

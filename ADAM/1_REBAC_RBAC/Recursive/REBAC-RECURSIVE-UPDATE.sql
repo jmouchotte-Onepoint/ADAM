@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION adam.fn_recursive_update_roles_permissions_with_model(
+CREATE OR REPLACE FUNCTION fn_recursive_update_roles_permissions_with_model(
     p_model_id UUID
 )
 RETURNS VOID AS $$
@@ -8,8 +8,8 @@ DECLARE
     v_model_relation TEXT;
     v_model_object_type TEXT;
     v_model_relation_origin TEXT;
-    v_model_relation_source_type adam.enum_relations_roles_permissions;
-    v_model_relation_type adam.enum_relations_roles_permissions;
+    v_model_relation_source_type enum_relations_roles_permissions;
+    v_model_relation_type enum_relations_roles_permissions;
 BEGIN
 
     -- ============================================
@@ -31,7 +31,7 @@ BEGIN
         v_model_relation_type,
         v_model_object_type,
         v_model_relation_origin
-    FROM adam.model AS m
+    FROM model AS m
     WHERE m.id = p_model_id;
 
     -- ============================================
@@ -56,7 +56,7 @@ BEGIN
             rel.id AS parent_relation_id,
             NULL::uuid AS ancestor_relation_id,
             NULL::uuid AS parent_role_id
-        FROM adam.relations AS rel
+        FROM relations AS rel
         WHERE rel.user_type = v_model_user_type
             AND rel.relation = v_model_relation_source
             AND rel.object_type = v_model_object_type
@@ -83,8 +83,8 @@ BEGIN
             rel2.id AS parent_relation_id,
             rel1.id AS ancestor_relation_id,
             NULL AS parent_role_id
-	    FROM adam.relations AS rel1 -- objectif / object
-            JOIN adam.relations AS rel2 -- source / user
+	    FROM relations AS rel1 -- objectif / object
+            JOIN relations AS rel2 -- source / user
                 ON rel2.object_id = rel1.user_id
                 AND rel2.object_type = rel1.user_type
                 AND rel2.tenant_id = rel1.tenant_id
@@ -114,7 +114,7 @@ BEGIN
             r.parent_relation_id,
             r.ancestor_relation_id,
             r.id
-        FROM adam.roles AS r
+        FROM roles AS r
         WHERE r.user_type = v_model_user_type
             AND r.relation = v_model_relation_source
             AND r.object_type = v_model_object_type
@@ -141,8 +141,8 @@ BEGIN
             rel.id,
             r.parent_relation_id,
             r.id
-        FROM adam.relations AS rel -- objectif / object
-            JOIN adam.roles AS r -- source / user
+        FROM relations AS rel -- objectif / object
+            JOIN roles AS r -- source / user
                 ON r.object_id = rel.user_id
                 AND r.object_type = rel.user_type
                 AND r.tenant_id = rel.tenant_id
@@ -158,7 +158,7 @@ BEGIN
     -- INSERTS avec DISTINCT
     -- ============================================
     insert_roles AS (
-        INSERT INTO adam.roles (
+        INSERT INTO roles (
             id, deep, user_type, user_id, relation, 
             object_type, object_id, tenant_id, model_id,
             parent_role_id, parent_relation_id, ancestor_relation_id
@@ -173,7 +173,7 @@ BEGIN
         RETURNING true
     )
 
-    INSERT INTO adam.permissions (
+    INSERT INTO permissions (
         id, deep, user_type, user_id, relation,
         object_type, object_id, tenant_id, model_id,
         parent_role_id, parent_relation_id, ancestor_relation_id    

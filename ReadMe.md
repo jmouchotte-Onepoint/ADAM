@@ -6,11 +6,12 @@ Ce script permet de charger une configuration ainsi que des données de test (re
 
 ### Installation Python & dépendances
 
-- **Python 3.10+** installé sur votre machine  
-- Installation des dépendances (si présentes dans un `requirements.txt`) :  
+- **Python 3.10+** installé sur votre machine
+- **uv** installé sur votre machine
+- Installation des dépendances du projet :
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ## Lancer un exemple
@@ -51,9 +52,10 @@ pip install -r requirements.txt
 ### Lancement
 
 - **Description** : Lancement local d'un environnement de test pour un des exemples à l'aide d'une commande bash & docker
-- **Exemple** :  
+- **Exemple** :
   ```bash
-  sh example.sh Spirodoc/Kanalyse/Qfq
+  sh example.sh Woodgrove
+  sh example.sh Tailspin mon_schema
   ```
 
 ## ⚙️ Arguments disponibles (main.py)
@@ -66,7 +68,7 @@ Le script accepte les paramètres suivants :
 - **Valeur par défaut** : `None`  
 - **Exemple** :  
   ```bash
-  python main.py --models ./Examples/Spirodoc/init-models.yml
+  uv run ./main.py --models ./Examples/Woodgrove/init-models.yml
   ```
 - **Résultat** : Création des fichiers pour le modèles, les règles, les RLS et le tenants :
   - `./ADAM/4_INSERT/INSERT-DYNAMIC-RULES.sql`
@@ -81,7 +83,7 @@ Le script accepte les paramètres suivants :
 - **Valeur par défaut** : `None`  
 - **Exemple** :  
   ```bash
-  python main.py --relations ./Examples/Spirodoc/init-relations.yml
+  uv run ./main.py --relations ./Examples/Woodgrove/dev-init-relations.yml
   ```
 - **Résultat** : Création du fichier pour insérer les relations en sql `./ADAM/5_DEV_TEST/ADAM-0001-ADD-RELATIONS.sql`
 - **Remarques**: Ajouter ce fichier dans le changelog.xml dans le docker l'exemple pour être utiliser par liquidbase au run

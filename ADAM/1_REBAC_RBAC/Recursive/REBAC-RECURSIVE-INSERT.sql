@@ -1,10 +1,10 @@
-CREATE OR REPLACE FUNCTION adam.fn_recursive_insert_roles_permissions(
+CREATE OR REPLACE FUNCTION fn_recursive_insert_roles_permissions(
     p_deep INT,
     p_id UUID,
     p_user_type TEXT,
     p_user_id TEXT,
     p_relation TEXT,
-    p_relation_type adam.enum_relations_roles_permissions,
+    p_relation_type enum_relations_roles_permissions,
     p_object_type TEXT,
     p_object_id TEXT,
     p_tenant_id TEXT,
@@ -58,12 +58,14 @@ BEGIN
             p_parent_relation_id,
             p_ancestor_relation_id,
             p_parent_role_id
-        FROM adam.model m
+        FROM model m
         WHERE m.object_type = p_object_type
             AND m.user_type = p_user_type
             AND m.relation_source = p_relation
             AND m.relation_origin IS NULL
             AND m.relation_type IN ('ROLES','PERMISSIONS')
+            -- New: HOTFIX pour éviter la récursion infinie
+            AND p_relation_type = 'RELATIONS'
 
         UNION ALL
 
@@ -85,8 +87,8 @@ BEGIN
             p_parent_relation_id,
             ro.parent_relation_id,
             ro.id AS parent_role_id
-        FROM adam.roles ro
-        INNER JOIN adam.model m
+        FROM roles ro
+        INNER JOIN model m
             ON m.relation_source = ro.relation
             AND m.relation_origin = p_relation
             AND m.object_type = p_object_type
@@ -118,8 +120,8 @@ BEGIN
             rel.id,
             NULL::uuid,
             NULL::uuid
-        FROM adam.relations rel
-        INNER JOIN adam.model m
+        FROM relations rel
+        INNER JOIN model m
             ON m.relation_source = rel.relation
             AND m.relation_origin = p_relation
             AND m.object_type = p_object_type
@@ -148,11 +150,11 @@ BEGIN
             t.parent_relation_id,
             t.parent_role_id
         FROM adam_tree t
-        INNER JOIN adam.relations rel
+        INNER JOIN relations rel
             ON rel.user_type = t.object_type
             AND rel.user_id = t.object_id
             AND rel.tenant_id = p_tenant_id
-        INNER JOIN adam.model m
+        INNER JOIN model m
             ON m.relation_origin = rel.relation
             AND m.object_type = rel.object_type
             AND m.relation_source = t.relation
@@ -166,7 +168,7 @@ BEGIN
     -- INSERTS avec DISTINCT
     -- ============================================
     insert_roles AS (
-        INSERT INTO adam.roles (
+        INSERT INTO roles (
             id, deep, user_type, user_id, relation, 
             object_type, object_id, tenant_id, model_id,
             parent_role_id, parent_relation_id, ancestor_relation_id,
@@ -183,7 +185,7 @@ BEGIN
         RETURNING true
     )
 
-    INSERT INTO adam.permissions (
+    INSERT INTO permissions (
         id, deep, user_type, user_id, relation,
         object_type, object_id, tenant_id, model_id,
         parent_role_id, parent_relation_id, ancestor_relation_id,

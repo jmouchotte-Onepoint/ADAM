@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION adam.fn_check_attributes(
+CREATE OR REPLACE FUNCTION fn_check_attributes(
     p_users_attributes jsonb,
     p_rules_attributes jsonb
 ) RETURNS BOOLEAN AS $$

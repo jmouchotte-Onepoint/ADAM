@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="2">
+    <org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="2">
+        <org.eventb.core.poIdentifier name="OPERATOR" org.eventb.core.type="ℙ(OPERATOR)"/>
+        <org.eventb.core.poIdentifier name="STATE" org.eventb.core.type="ℙ(STATE)"/>
+        <org.eventb.core.poIdentifier name="INSTRUCTIONS" org.eventb.core.type="ℙ(INSTRUCTIONS)"/>
+        <org.eventb.core.poIdentifier name="JOIN_TYPE" org.eventb.core.type="ℙ(JOIN_TYPE)"/>
+        <org.eventb.core.poIdentifier name="LEFT" org.eventb.core.type="JOIN_TYPE"/>
+        <org.eventb.core.poIdentifier name="EQ" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="IN" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="SELECT" org.eventb.core.type="INSTRUCTIONS"/>
+        <org.eventb.core.poIdentifier name="BETWEEN" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="INNER" org.eventb.core.type="JOIN_TYPE"/>
+        <org.eventb.core.poIdentifier name="VALID" org.eventb.core.type="STATE"/>
+        <org.eventb.core.poIdentifier name="RIGHT" org.eventb.core.type="JOIN_TYPE"/>
+        <org.eventb.core.poIdentifier name="REJECTED" org.eventb.core.type="STATE"/>
+        <org.eventb.core.poIdentifier name="PENDING" org.eventb.core.type="STATE"/>
+        <org.eventb.core.poIdentifier name="LIKE" org.eventb.core.type="OPERATOR"/>
+        <org.eventb.core.poIdentifier name="INSERT" org.eventb.core.type="INSTRUCTIONS"/>
+    </org.eventb.core.poPredicateSet>
+    <org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/Adam/M0_Init_Context.bpo|org.eventb.core.poFile#M0_Init_Context|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="2">
+        <org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="partition(STATE,{PENDING},{VALID},{REJECTED})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_dqa4az5mEfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="partition(OPERATOR,{LIKE},{BETWEEN},{IN},{EQ})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_dqbfcD5mEfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="partition(JOIN_TYPE,{LEFT},{RIGHT},{INNER})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_dqbfcT5mEfGBkNnRVg_R5Q"/>
+        <org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="partition(INSTRUCTIONS,{SELECT},{INSERT})" org.eventb.core.source="/Adam/M0_Init_Context.buc|org.eventb.core.contextFile#M0_Init_Context|org.eventb.core.axiom#_zV1b8j5mEfGBkNnRVg_R5Q"/>
+    </org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

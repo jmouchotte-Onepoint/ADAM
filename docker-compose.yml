@@ -13,18 +13,18 @@ services:
     volumes:
         - ./docker/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
   liquibase:
     image : liquibase/liquibase:4.32.0
     environment:
+      TARGET_SCHEMA: ${TARGET_SCHEMA:-adam}
       LIQUIBASE_COMMAND_USERNAME: postgres
       LIQUIBASE_COMMAND_PASSWORD: postgres
       LIQUIBASE_COMMAND_URL: jdbc:postgresql://postgres:5432/adamdb
-      LIQUIBASE_COMMAND_CHANGELOG_FILE: changelog.xml
+      LIQUIBASE_COMMAND_CHANGELOG_FILE: ADAM/changelog.xml
     volumes:
       - ./ADAM:/liquibase/ADAM
-      - ./ADAM/changelog.xml:/liquibase/changelog.xml
     depends_on:
       postgres:
         condition: service_healthy

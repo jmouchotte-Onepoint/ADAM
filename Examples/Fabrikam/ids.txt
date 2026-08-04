@@ -1,0 +1,15 @@
+Fabrikam ids mapping
+
+utilisateur:019f4c9f-d326-76ba-bce9-f098aa9cb046 = alice
+utilisateur:019f4c9f-d327-782e-8f2f-564963ec2f48 = bob
+utilisateur:019f4c9f-d327-7068-bfdd-e85b74c711c7 = carole
+utilisateur:019f4c9f-d327-77a1-b538-047e3d52add7 = david
+utilisateur:019f4c9f-d327-7507-9aa4-1add4ef62e75 = emma
+utilisateur:019f4c9f-d327-78f6-a04c-528d94dea4e1 = frank
+
+organisation:019f4c9f-d327-75b8-a042-4d4c236d039f = org-001
+organisation:019f4c9f-d327-7e8e-bb56-0af61435c2e4 = org-002
+
+entreprise:019f4c9f-d327-7088-9f2a-4a519a952a7a = ent-001
+entreprise:019f4c9f-d327-7abb-af11-23a17143ed21 = ent-002
+entreprise:019f4c9f-d327-726a-a6d9-da2ffda88feb = ent-101

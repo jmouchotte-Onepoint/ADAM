@@ -24,9 +24,9 @@
         <sqlFile path="REBAC-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <include file="ADAM/1_REBAC_RBAC/Recursive/changelog.xml"/>
-    <include file="ADAM/1_REBAC_RBAC/Function/changelog.xml"/>
-    <include file="ADAM/1_REBAC_RBAC/Trigger/changelog.xml"/>
-    <include file="ADAM/1_REBAC_RBAC/Policy/changelog.xml"/>
+    <include file="Recursive/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="Function/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="Trigger/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="Policy/changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

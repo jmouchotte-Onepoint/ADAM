@@ -1,2 +1,5 @@
 -- 1. Creation du schéma if not exists
-CREATE SCHEMA IF NOT EXISTS adam;
+DO $$
+BEGIN
+	EXECUTE format('CREATE SCHEMA IF NOT EXISTS %I', current_schema());
+END $$;

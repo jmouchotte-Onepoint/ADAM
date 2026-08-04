@@ -19,8 +19,9 @@
         <sqlFile path="ABAC-ATTRIBUTES-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <include file="ADAM/3_ABAC_CBAC/Function/changelog.xml"/>
-    <include file="ADAM/3_ABAC_CBAC/Policy/changelog.xml"/>
-    <include file="ADAM/3_ABAC_CBAC/View/changelog.xml"/>
+
+    <include file="Function/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="Policy/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="View/changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

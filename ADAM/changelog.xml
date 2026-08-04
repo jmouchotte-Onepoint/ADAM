@@ -4,11 +4,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
         logicalFilePath="ADAM/changelog.xml">
 
-    <include file="ADAM/0_INIT/changelog.xml" />
-    <include file="ADAM/1_REBAC_RBAC/changelog.xml" />
-    <include file="ADAM/2_RUBAC/changelog.xml" />
-    <include file="ADAM/3_ABAC_CBAC/changelog.xml" />
-    <include file="ADAM/4_INSERT/changelog.xml" />
-    <include file="ADAM/5_DEV_TEST/changelog.xml" context="dev"/>
+    <include file="0_INIT/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="1_REBAC_RBAC/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="2_RUBAC/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="3_ABAC_CBAC/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="4_INSERT/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="5_DEV_TEST/changelog.xml" context="dev" relativeToChangelogFile="true"/>
+
 
 </databaseChangeLog>

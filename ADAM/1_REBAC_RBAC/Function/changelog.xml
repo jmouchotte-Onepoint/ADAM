@@ -18,5 +18,10 @@
         <comment>REBAC : Initalise le model-Id pour les insertions directs</comment>
         <sqlFile path="REBAC-FUNC-TRIGGER-SET-MODEL-ID.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
+
+    <changeSet author="noMemoryLeak" id="REBAC-FUNC-SET-CONDITION-RELATION-ID">
+        <comment>REBAC : Initialise condition_relation_id a la creation d'une relation</comment>
+        <sqlFile path="REBAC-FUNC-TRIGGER-SET-CONDITION-RELATION-ID.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
     
 </databaseChangeLog>

@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION adam.fn_check_dynamic_rules(
+CREATE OR REPLACE FUNCTION fn_check_dynamic_rules(
     p_rule_id UUID,
     p_users_attributes jsonb
 ) RETURNS BOOLEAN AS $$
@@ -18,7 +18,7 @@ BEGIN
     -- Récupérer la condition et les clés
     SELECT dr.rule, dr.params
     INTO v_rule, v_array_params
-    FROM adam.dynamic_rules AS dr
+    FROM dynamic_rules AS dr
     WHERE dr.id = p_rule_id;
 
     -- Acune règle ne match

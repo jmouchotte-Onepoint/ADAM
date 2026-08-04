@@ -1,8 +1,23 @@
+import json
+
+
 def esc(val):
-    return str(val).replace("'", "\"") if val else ""
+    return str(val).replace("'", "''") if val is not None else ""
 
 def sql_value(val):
-    return "NULL" if val is None or val == "" else f"'{esc(val)}'"
+    if val is None or val == "":
+        return "NULL"
+    if isinstance(val, bool):
+        return "TRUE" if val else "FALSE"
+    if isinstance(val, (int, float)):
+        return str(val)
+    return f"'{esc(val)}'"
+
+
+def sql_jsonb(val):
+    if val is None:
+        return "NULL"
+    return f"'{esc(json.dumps(val))}'::jsonb"
 
 def sql_array(val):
     # Convert params list to PostgreSQL array format
@@ -27,7 +42,7 @@ def get_origine_source(exp: str, default=None):
     relation_or_user_type, condition = split_user_type_condition(relation_user_condition)
     return relation_or_user_type, condition, relation_source
 
-def get_origin_user_type(relation_source_name, array_relation, relation_type='relations'):
+def get_origin_user_type(relation_source_name, array_relation, relation_type='relations', include_condition=False):
     if array_relation == {} : return []
 
     result = []
@@ -40,5 +55,8 @@ def get_origin_user_type(relation_source_name, array_relation, relation_type='re
                     # Récuperation relation, relation_type
                     if relation_type in user_type:
                         clean_user_type, condition = split_user_type_condition(user_type.get(relation_type))
-                        result.append(clean_user_type)
+                        if include_condition:
+                            result.append((clean_user_type, condition))
+                        else:
+                            result.append(clean_user_type)
     return result

@@ -1,0 +1,69 @@
+fabrikam:
+  # Organisation membership
+  - user: "utilisateur:019f4c9f-d326-76ba-bce9-f098aa9cb046"
+    relation: "membre"
+    object: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+
+  - user: "utilisateur:019f4c9f-d327-782e-8f2f-564963ec2f48"
+    relation: "membre"
+    object: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+
+  - user: "utilisateur:019f4c9f-d327-7068-bfdd-e85b74c711c7"
+    relation: "membre"
+    object: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+
+  - user: "utilisateur:019f4c9f-d327-77a1-b538-047e3d52add7"
+    relation: "membre"
+    object: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+
+  # Enterprise employment
+  - user: "utilisateur:019f4c9f-d326-76ba-bce9-f098aa9cb046"
+    relation: "salarie"
+    object: "entreprise:019f4c9f-d327-7088-9f2a-4a519a952a7a"
+
+  - user: "utilisateur:019f4c9f-d327-782e-8f2f-564963ec2f48"
+    relation: "salarie"
+    object: "entreprise:019f4c9f-d327-7088-9f2a-4a519a952a7a"
+
+  - user: "utilisateur:019f4c9f-d327-7068-bfdd-e85b74c711c7"
+    relation: "salarie"
+    object: "entreprise:019f4c9f-d327-7088-9f2a-4a519a952a7a"
+
+  - user: "utilisateur:019f4c9f-d327-77a1-b538-047e3d52add7"
+    relation: "salarie"
+    object: "entreprise:019f4c9f-d327-7abb-af11-23a17143ed21"
+
+  # Optional contact link
+  - user: "utilisateur:019f4c9f-d326-76ba-bce9-f098aa9cb046"
+    relation: "contact"
+    object: "entreprise:019f4c9f-d327-7abb-af11-23a17143ed21"
+
+  # Organization to enterprise scope
+  - user: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+    relation: "gere"
+    object: "entreprise:019f4c9f-d327-7088-9f2a-4a519a952a7a"
+
+  - user: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+    relation: "gere"
+    object: "entreprise:019f4c9f-d327-7abb-af11-23a17143ed21"
+
+  # Direct roles
+  - type: roles
+    user: "utilisateur:019f4c9f-d326-76ba-bce9-f098aa9cb046"
+    relation: "admin"
+    object: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+
+  - type: roles
+    user: "utilisateur:019f4c9f-d327-782e-8f2f-564963ec2f48"
+    relation: "gestionnaire"
+    object: "organisation:019f4c9f-d327-75b8-a042-4d4c236d039f"
+
+  - type: roles
+    user: "utilisateur:019f4c9f-d327-7068-bfdd-e85b74c711c7"
+    relation: "signataire"
+    object: "entreprise:019f4c9f-d327-7088-9f2a-4a519a952a7a"
+
+  - type: roles
+    user: "utilisateur:019f4c9f-d327-77a1-b538-047e3d52add7"
+    relation: "valideur_identite"
+    object: "entreprise:019f4c9f-d327-7abb-af11-23a17143ed21"

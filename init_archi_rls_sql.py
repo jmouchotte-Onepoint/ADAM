@@ -68,15 +68,15 @@ def init_model(data, model_file, model_rules_file, rls_file):
                                     list_relation = [relation_source]
 
                                 for relation in list_relation:
-                                    array_origin_user_type = get_origin_user_type(relation, define_object_relations)
+                                    array_origin_user_type = get_origin_user_type(relation, define_object_relations, include_condition=True)
                                     #Si relation avec héritage // from origine
                                     if relation_origin is None:
                                         relation, _, relation_origin = get_origine_source(relation)
                                     # Recuperation de la relation en fonction de si il y a une origine                                    
                                     if relation_origin != None: 
-                                        array_origin_user_type = get_origin_user_type(relation_origin, define_object_relations)
+                                        array_origin_user_type = get_origin_user_type(relation_origin, define_object_relations, include_condition=True)
                                     else:
-                                        array_origin_user_type = get_origin_user_type(relation, define_object_relations)
+                                        array_origin_user_type = get_origin_user_type(relation, define_object_relations, include_condition=True)
 
                                     # Insertion direct, relations, roles, permissions sans references
                                     if len(array_origin_user_type) == 0:
@@ -84,8 +84,9 @@ def init_model(data, model_file, model_rules_file, rls_file):
                                         write_model_rules(model_rules_file, model_id, list_rules)
                                     # Insertion par la relation d'origine
                                     else:
-                                        for user_type in array_origin_user_type:
-                                            model_id = write_model(model_file, relation_type, user_type, relation, relation_source_type, object_type, new_relation, relation_origin, None)
+                                        for user_type, origin_condition in array_origin_user_type:
+                                            model_condition = condition if condition is not None else origin_condition
+                                            model_id = write_model(model_file, relation_type, user_type, relation, relation_source_type, object_type, new_relation, relation_origin, model_condition)
                                             write_model_rules(model_rules_file, model_id, list_rules)
 
     # Ecriture des RLS dans le fichier final
