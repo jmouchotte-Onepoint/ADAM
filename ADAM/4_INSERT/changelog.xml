@@ -19,7 +19,7 @@
         <sqlFile path="INSERT-DYNAMIC-RULES.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="INSERT-RLS-POLICY">
+    <changeSet author="noMemoryLeak" id="INSERT-RLS-POLICY" runOnChange="true">
         <comment>INSERT : Initialisatione et création de RLS sur les tables</comment>
         <sqlFile path="INSERT-RLS-POLICY.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

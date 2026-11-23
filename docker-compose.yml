@@ -11,7 +11,7 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-        - ./docker/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+        - ./Docker/postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
     ports:
       - "5433:5432"
 

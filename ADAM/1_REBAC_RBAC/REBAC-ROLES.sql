@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS roles (
     is_auto_generated BOOLEAN DEFAULT false,
     created_by TEXT NOT NULL DEFAULT get_current_user_id(),
     creation_date TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ DEFAULT NULL,
     FOREIGN KEY (model_id) REFERENCES model(id) ON DELETE RESTRICT,
     FOREIGN KEY (condition_relation_id) REFERENCES relations(id) ON DELETE CASCADE,
     FOREIGN KEY (parent_role_id) REFERENCES roles(id) ON DELETE CASCADE,
@@ -32,7 +33,7 @@ CREATE INDEX idx_roles_parent_relation_id ON roles (parent_relation_id);
 CREATE INDEX idx_roles_relation ON roles(relation);
 CREATE INDEX idx_roles_object_tenant ON roles (object_type, object_id, tenant_id);
 CREATE INDEX idx_roles_user_tenant  ON roles (user_type, user_id, tenant_id);
-CREATE UNIQUE INDEX idx_uniq_roles ON roles (user_id,relation,object_id,tenant_id,COALESCE(parent_role_id, '00000000-0000-0000-0000-000000000000'::uuid),parent_relation_id);
+CREATE UNIQUE INDEX idx_uniq_roles ON roles (user_id,relation,object_id,tenant_id,parent_role_id,parent_relation_id) NULLS NOT DISTINCT;
 
 -- 4. Index pour lecture
 CREATE INDEX idx_roles_user_object_tenant ON roles(user_type, user_id, relation, object_type, object_id, tenant_id);

@@ -29,9 +29,19 @@ Thumbs.db
 
 # Logs
 *.log
+# ...sauf les logs conservés comme preuves de validation (liés depuis les README)
+!Benchmark/results-*/*.log
+!Benchmark/runs/**/*.log
+!Results/adam/migration-validation.log
 
 # Build artifacts
 target/
 
 # Docker volumes / local data
 Docker/postgres/data/
+
+# Campagnes de mesure locales (les campagnes conservées sont versionnées)
+Results/local/
+
+# Code de production des livrables de l'article : hors dépôt
+Article-Export/

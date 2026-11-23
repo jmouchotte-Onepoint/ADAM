@@ -1,0 +1,3 @@
+PASS: historical upgrade rejects duplicates atomically, preserves data and is repeatable
+PASS: consolidated-install upgrade and re-execution
+PASS: fresh installation and re-execution

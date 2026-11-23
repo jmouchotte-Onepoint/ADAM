@@ -27,16 +27,16 @@ case "$TARGET_SCHEMA" in
 esac
 
 # Nettoyer les folder sans supprimer .gitkeep
-find ./docker/postgres/docker-entrypoint-initdb.d/ -mindepth 1 ! -name '.gitkeep' -exec rm -rf {} +
+find ./Docker/postgres/docker-entrypoint-initdb.d/ -mindepth 1 ! -name '.gitkeep' -exec rm -rf {} +
 find ./ADAM/4_INSERT/ -mindepth 1 ! -name 'changelog.xml' -exec rm -rf {} +
 find ./ADAM/5_DEV_TEST/ -mindepth 1 ! -name '.gitkeep' -exec rm -rf {} +
 
 # Copier tous les fichiers nécessaires (remplace selon tes besoins)
-cp -r ./Examples/${EXAMPLE_NAME}/Database/docker-entrypoint-initdb.d/* ./docker/postgres/docker-entrypoint-initdb.d/
+cp -r ./Examples/${EXAMPLE_NAME}/Database/docker-entrypoint-initdb.d/* ./Docker/postgres/docker-entrypoint-initdb.d/
 cp -r ./Examples/${EXAMPLE_NAME}/Database/adam-entrypoint-dev-test.d/* ./ADAM/5_DEV_TEST/
 
 # Génère un script d'init PostgreSQL pour créer le schéma cible et l'utiliser par défaut
-cat > ./docker/postgres/docker-entrypoint-initdb.d/0000-init-target-schema.sql <<EOF
+cat > ./Docker/postgres/docker-entrypoint-initdb.d/0000-init-target-schema.sql <<EOF
 CREATE SCHEMA IF NOT EXISTS ${TARGET_SCHEMA};
 ALTER ROLE postgres IN DATABASE adamdb SET search_path TO ${TARGET_SCHEMA}, public;
 EOF

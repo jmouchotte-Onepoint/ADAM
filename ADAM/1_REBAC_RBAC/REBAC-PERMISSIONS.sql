@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS permissions (
     is_auto_generated BOOLEAN DEFAULT false,
     created_by TEXT NOT NULL DEFAULT get_current_user_id(),
     creation_date TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ DEFAULT NULL,
     FOREIGN KEY (model_id) REFERENCES model(id) ON DELETE RESTRICT,
     FOREIGN KEY (condition_relation_id) REFERENCES relations(id) ON DELETE CASCADE,
     FOREIGN KEY (parent_role_id) REFERENCES roles(id) ON DELETE CASCADE,
@@ -29,7 +30,7 @@ CREATE INDEX idx_permissions_parent_role_id ON permissions(parent_role_id);
 CREATE INDEX idx_permissions_parent_relation_id ON permissions (parent_relation_id);
 
 -- 3. Index pour insertions
-CREATE UNIQUE INDEX idx_uniq_permissions ON permissions(user_id,relation,object_id,tenant_id,COALESCE(parent_role_id, '00000000-0000-0000-0000-000000000000'::uuid),parent_relation_id);
+CREATE UNIQUE INDEX idx_uniq_permissions ON permissions(user_id,relation,object_id,tenant_id,parent_role_id,parent_relation_id) NULLS NOT DISTINCT;
 
 -- 4. Index pour lecture
 CREATE INDEX idx_permissions_user_object_tenant ON permissions(user_type, user_id, relation, object_type, object_id, tenant_id);

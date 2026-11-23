@@ -10,6 +10,7 @@
     </changeSet>
     
     <changeSet author="noMemoryLeak" id="REBAC-FUNC-EXPIRATION-DATE">
+        <validCheckSum>9:66497025b192da7fcca425e73490ff7b</validCheckSum>
         <comment>REBAC : Initalise PGCron pour supprimer toute les heures les roles temporaires</comment>
         <sqlFile path="REBAC-FUNC-EXPIRATION-DATE.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

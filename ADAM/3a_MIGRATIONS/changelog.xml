@@ -1,0 +1,10 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/3a_MIGRATIONS/changelog.xml">
+    <changeSet author="adam" id="2026-authorization-integrity">
+        <sqlFile path="authorization-indexes.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="../3_ABAC_CBAC/Function/ABAC-CHECK-ALL-ATTRIBUTES-FROM-VIEW.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+</databaseChangeLog>

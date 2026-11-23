@@ -1,0 +1,74 @@
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86CameraAccessEnable
+> Warning:          Could not resolve keysym XF86CameraAccessDisable
+> Warning:          Could not resolve keysym XF86CameraAccessToggle
+> Warning:          Could not resolve keysym XF86NextElement
+> Warning:          Could not resolve keysym XF86PreviousElement
+> Warning:          Could not resolve keysym XF86AutopilotEngageToggle
+> Warning:          Could not resolve keysym XF86MarkWaypoint
+> Warning:          Could not resolve keysym XF86Sos
+> Warning:          Could not resolve keysym XF86NavChart
+> Warning:          Could not resolve keysym XF86FishingChart
+> Warning:          Could not resolve keysym XF86SingleRangeRadar
+> Warning:          Could not resolve keysym XF86DualRangeRadar
+> Warning:          Could not resolve keysym XF86RadarOverlay
+> Warning:          Could not resolve keysym XF86TraditionalSonar
+> Warning:          Could not resolve keysym XF86ClearvuSonar
+> Warning:          Could not resolve keysym XF86SidevuSonar
+> Warning:          Could not resolve keysym XF86NavInfo
+Errors from xkbcomp are not fatal to the X server
+Workspace: /tmp/rodin-headless.tzxaHu
+Processing 1 archives
+
+=== Step 1: Extracting archives ===
+  adam-replayed → Adam
+
+=== Step 2: Building headless builder plugin ===
+  Plugin built: /tmp/rodin-headless.zC5bYH/rodinbuilder_rodinheadlesszC5bYH.jar
+
+=== Step 3: Running Rodin headless builder ===
+Rodin build timeout: 60m
+Importing: Adam
+Building workspace...
+Build complete.
+=== Static check results ===
+  M1_Adam: OK
+  M1_Adam1: OK
+  M0_Init_Context: OK
+  M1_Metadatas_Context: OK
+  M2_Tenant_Context: OK
+  Test_Valid_Context: OK
+Static check: ALL COMPONENTS ACCURATE
+=== Auto-prove: M1_Adam ===
+  Total POs: 8, undischarged: 0
+  Discharged: 8/8
+=== Auto-prove: M1_Adam1 ===
+  Total POs: 0, undischarged: 0
+  Discharged: 0/0
+=== Auto-prove: M0_Init_Context ===
+  Total POs: 0, undischarged: 0
+  Discharged: 0/0
+=== Auto-prove: M1_Metadatas_Context ===
+  Total POs: 4, undischarged: 1
+  Discharged: 4/4
+=== Auto-prove: M2_Tenant_Context ===
+  Total POs: 0, undischarged: 0
+  Discharged: 0/0
+=== Auto-prove: Test_Valid_Context ===
+  Total POs: 4, undischarged: 0
+  Discharged: 4/4
+Auto-prover: ALL PROOF OBLIGATIONS DISCHARGED
+!SESSION 2026-11-23 11:18:02.544 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=21.0.13
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -application rodinbuilder.rodinheadlesszC5bYH.headlessBuilder
+Command-line arguments:  -application rodinbuilder.rodinheadlesszC5bYH.headlessBuilder -data /tmp/rodin-headless.tzxaHu -consolelog
+!ENTRY org.eclipse.core.resources 2 10035 2026-11-23 11:18:15.987
+!MESSAGE The workspace will exit with unsaved changes in this session.
+
+=== Step 4: Repackaging archives ===
+  adam-replayed: 24 file(s) updated
+
+Done.

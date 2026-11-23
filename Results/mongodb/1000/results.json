@@ -1,0 +1,125 @@
+{
+  "seeds": 1000,
+  "image_id": "sha256:479e85ced54ffb8a40dade1dcde2da2a9ae858515b9415e9cc54bfb8f0575d01",
+  "mongodb_version": "8.0.38",
+  "host": "macOS-26.7.2-arm64-arm-64bit-Mach-O",
+  "container": "1 CPU, 1 GiB, WiredTiger cache 0.25 GiB, ephemeral standalone",
+  "measurement": "MongoDB profiler millis, integer milliseconds; server time, not client time",
+  "read_concern": "{}",
+  "write_concern": "{}",
+  "source_sha256": {
+    "mongo_adapter.py": "95f9b4f245b6d7935692f6fd4d0fc477db7cc5543f763606886d64e3d2db31b9",
+    "test_mongo_adapter.py": "6d821eac63ed10faca331421465e70e5b8885cd9566054d79c0c9a379a2d5e46",
+    "run_mongo.py": "0d9a964423e24d1fa3866f74c79465da599a1f82fd0b715df881eb4439e836d0"
+  },
+  "summary": [
+    {
+      "operation": "read",
+      "clients": 1,
+      "repeat": 1,
+      "samples": 100,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "write",
+      "clients": 1,
+      "repeat": 1,
+      "samples": 100,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "read",
+      "clients": 1,
+      "repeat": 2,
+      "samples": 100,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "write",
+      "clients": 1,
+      "repeat": 2,
+      "samples": 100,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "read",
+      "clients": 1,
+      "repeat": 3,
+      "samples": 100,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "write",
+      "clients": 1,
+      "repeat": 3,
+      "samples": 100,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "read",
+      "clients": 4,
+      "repeat": 1,
+      "samples": 400,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "write",
+      "clients": 4,
+      "repeat": 1,
+      "samples": 400,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "read",
+      "clients": 4,
+      "repeat": 2,
+      "samples": 400,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "write",
+      "clients": 4,
+      "repeat": 2,
+      "samples": 400,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "read",
+      "clients": 4,
+      "repeat": 3,
+      "samples": 400,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    },
+    {
+      "operation": "write",
+      "clients": 4,
+      "repeat": 3,
+      "samples": 400,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "p99_ms": 0
+    }
+  ]
+}

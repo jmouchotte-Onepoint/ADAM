@@ -10,6 +10,7 @@
     </changeSet>
 
     <changeSet author="noMemoryLeak" id="ABAC-CHECK-ALL-ATTRIBUTES-FROM-VIEW">
+        <validCheckSum>9:4e2b977f6c273b9d31e748c19e8e8e06</validCheckSum>
         <comment>ABAC : Création de la fonction pour évaluer tous les attributs d'une relations selon son ID et des attributs de la vue</comment>
         <sqlFile path="ABAC-CHECK-ALL-ATTRIBUTES-FROM-VIEW.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS relations(
     is_auto_generated BOOLEAN DEFAULT false,
     created_by TEXT NOT NULL DEFAULT get_current_user_id(),
     creation_date TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ DEFAULT NULL,
     PRIMARY KEY (user_type, user_id, relation, object_type, object_id, tenant_id),
     -- Clé étrangère vers les règles valides
     FOREIGN KEY (model_id) REFERENCES model(id) ON DELETE RESTRICT,

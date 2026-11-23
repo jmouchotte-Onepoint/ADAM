@@ -10,16 +10,19 @@
     </changeSet>
 
     <changeSet author="noMemoryLeak" id="REBAC-RELATIONS">
+        <validCheckSum>9:d4ea4497d1cead1761ca4609368652aa</validCheckSum>
         <comment>REBAC : Création de la table pour les relations</comment>
         <sqlFile path="REBAC-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
     <changeSet author="noMemoryLeak" id="REBAC-ROLES">
+        <validCheckSum>9:ed0efb6546b139a03e9ec27caad284c6</validCheckSum>
         <comment>REBAC : Création de la table pour les roles</comment>
         <sqlFile path="REBAC-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
     <changeSet author="noMemoryLeak" id="REBAC-PERMISSIONS">
+        <validCheckSum>9:33b0baf06f9e4a26c8fa05b72c3f3c45</validCheckSum>
         <comment>REBAC : Création de la table pour les permissions</comment>
         <sqlFile path="REBAC-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

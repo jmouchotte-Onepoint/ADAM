@@ -1,12 +1,8 @@
 -- Une seule fois par base
 -- CREATE EXTENSION IF NOT EXISTS pg_cron;
 
--- Ajout de la colonne spécifique
-ALTER TABLE relations ADD COLUMN expires_at TIMESTAMP WITH TIME ZONE;
-ALTER TABLE roles ADD COLUMN expires_at TIMESTAMP WITH TIME ZONE;
-ALTER TABLE permissions ADD COLUMN expires_at TIMESTAMP WITH TIME ZONE;
-
 -- Fonction de clean_up
+-- La colonne expires_at est déclarée dans les CREATE TABLE (REBAC-RELATIONS / ROLES / PERMISSIONS)
 CREATE OR REPLACE FUNCTION cleanup_expired()
     RETURNS void AS $$
 BEGIN
