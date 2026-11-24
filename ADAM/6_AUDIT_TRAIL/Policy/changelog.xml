@@ -1,0 +1,12 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/6_AUDIT_TRAIL/Policy/changelog.xml">
+
+    <changeSet author="adam" id="AUDIT-POLICY-LOG" runOnChange="true">
+        <comment>AUDIT : lecture du journal limitée au tenant courant</comment>
+        <sqlFile path="AUDIT-POLICY-LOG.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

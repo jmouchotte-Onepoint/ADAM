@@ -21,4 +21,6 @@ BEGIN
     -- Si aucune règle trouvée ou toutes validées → accès autorisé
     RETURN TRUE;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER STABLE PARALLEL SAFE;
+-- SECURITY INVOKER : les vues étant en security_invoker, l'évaluation n'a
+-- plus besoin des droits du propriétaire (A01-4/7).
+$$ LANGUAGE plpgsql SECURITY INVOKER STABLE PARALLEL SAFE;

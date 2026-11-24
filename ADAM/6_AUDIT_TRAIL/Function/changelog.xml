@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/6_AUDIT_TRAIL/Function/changelog.xml">
+
+    <changeSet author="adam" id="AUDIT-FUNC-APPEND-ONLY" runOnChange="true">
+        <comment>AUDIT : refus des modifications du journal</comment>
+        <sqlFile path="AUDIT-FUNC-APPEND-ONLY.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="adam" id="AUDIT-FUNC-PAYLOAD" runOnChange="true">
+        <comment>AUDIT : contenu canonique d'une entrée</comment>
+        <sqlFile path="AUDIT-FUNC-PAYLOAD.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="adam" id="AUDIT-FUNC-APPEND" runOnChange="true">
+        <comment>AUDIT : ajout d'une entrée et chaînage par tenant</comment>
+        <sqlFile path="AUDIT-FUNC-APPEND.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="adam" id="AUDIT-FUNC-ROW" runOnChange="true">
+        <comment>AUDIT : trigger générique sur les tables d'autorisation</comment>
+        <sqlFile path="AUDIT-FUNC-ROW.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="adam" id="AUDIT-FUNC-LOG-DECISION" runOnChange="true">
+        <comment>AUDIT : journalisation d'une décision depuis l'applicatif</comment>
+        <sqlFile path="AUDIT-FUNC-LOG-DECISION.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="adam" id="AUDIT-FUNC-VERIFY-CHAIN" runOnChange="true">
+        <comment>AUDIT : vérification de la chaîne de hachage</comment>
+        <sqlFile path="AUDIT-FUNC-VERIFY-CHAIN.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

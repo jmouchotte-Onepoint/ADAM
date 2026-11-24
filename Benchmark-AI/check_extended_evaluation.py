@@ -7,8 +7,8 @@ import subprocess
 import time
 from uuid import uuid4
 
-from compare_attribute_plans import install_candidate
-from compare_authorization import IMAGES, setup_postgres, start_container
+from performance.compare_attribute_plans import install_candidate
+from performance.compare_authorization import IMAGES, setup_postgres, start_container
 from run import ROOT, tests
 from support import connect
 
@@ -50,7 +50,7 @@ def main() -> None:
             checks[variant] = {pattern: tests(pattern) for pattern in PATTERNS}
         source_files = files + [Path(__file__).resolve(), ROOT / "Benchmark-AI/run.py",
                                 ROOT / "Benchmark-AI/support.py",
-                                ROOT / "Benchmark-AI/compare_attribute_plans.py"]
+                                ROOT / "Benchmark-AI/performance/compare_attribute_plans.py"]
         source_files += [ROOT / "Benchmark-AI" / pattern for pattern in PATTERNS]
         failed = any(result["exit_code"] for suite in checks.values() for result in suite.values())
         report = {"postgres_version": version, "image_id": image_id, "checks": checks,

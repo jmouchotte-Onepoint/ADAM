@@ -1,4 +1,7 @@
-CREATE OR REPLACE VIEW view_roles_rules AS
+-- security_invoker : sinon la vue tourne avec les droits du propriétaire
+-- et saute la RLS des tables dessous (A01-7).
+CREATE OR REPLACE VIEW view_roles_rules
+    WITH (security_invoker = true) AS
 SELECT
      r.id,
      rel.rule_id,

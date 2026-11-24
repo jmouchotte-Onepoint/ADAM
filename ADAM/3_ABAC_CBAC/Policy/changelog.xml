@@ -4,22 +4,22 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
         logicalFilePath="ADAM/3_ABAC_CBAC/POLICY/changelog.xml">
 
-    <changeSet author="noMemoryLeak" id="ABAC-POLICY-ATTRIBUTES-ADD-RLS">
+    <changeSet author="noMemoryLeak" id="ABAC-POLICY-ATTRIBUTES-ADD-RLS" runOnChange="true">
         <comment>POLICY-ABAC : Activation des RLS pour les tables et vues d'attributs</comment>
         <sqlFile path="ABAC-POLICY-ATTRIBUTES-ADD-RLS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="POLICY-ABAC-ATTRIBUTES-RELATIONS">
+    <changeSet author="noMemoryLeak" id="POLICY-ABAC-ATTRIBUTES-RELATIONS" runOnChange="true">
         <comment>POLICY-ABAC : Activation pour select et insert sur les tables relations_rules_attributes</comment>
         <sqlFile path="ABAC-POLICY-ATTRIBUTES-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="POLICY-ABAC-ATTRIBUTES-ROLES">
+    <changeSet author="noMemoryLeak" id="POLICY-ABAC-ATTRIBUTES-ROLES" runOnChange="true">
         <comment>POLICY-ABAC : Activation pour select et insert sur les tables roles_rules_attributes</comment>
         <sqlFile path="ABAC-POLICY-ATTRIBUTES-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="POLICY-ABAC-ATTRIBUTES-PERMISSIONS">
+    <changeSet author="noMemoryLeak" id="POLICY-ABAC-ATTRIBUTES-PERMISSIONS" runOnChange="true">
         <comment>POLICY-ABAC : Activation pour select et insert sur les tables permissions_rules_attributes</comment>
         <sqlFile path="ABAC-POLICY-ATTRIBUTES-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

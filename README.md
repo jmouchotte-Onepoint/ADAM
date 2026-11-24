@@ -69,6 +69,8 @@ la précédente :
 | 3 | `3_ABAC_CBAC` | Conditions sur attributs/contexte au-dessus de RBAC/RUBAC |
 | 4 | `4_INSERT` | SQL généré par `main.py --models` (modèle, politiques, RLS, tenants, règles) |
 | 5 | `5_DEV_TEST` | Données de dev/test propres à l'exemple, appliquées uniquement avec le contexte `dev` |
+| 6 | `6_AUDIT_TRAIL` | Journal des écritures d'autorisation, en ajout seul et chaîné par tenant |
+| 7 | `7_SECURITY` | Invariants transverses : `search_path` figé sur les fonctions du schéma |
 
 ## Démarrage rapide
 

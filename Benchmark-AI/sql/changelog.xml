@@ -6,5 +6,6 @@
     <include file="../../ADAM/1_REBAC_RBAC/changelog.xml" relativeToChangelogFile="true"/>
     <include file="../../ADAM/2_RUBAC/changelog.xml" relativeToChangelogFile="true"/>
     <include file="../../ADAM/3_ABAC_CBAC/changelog.xml" relativeToChangelogFile="true"/>
-    <include file="../../ADAM/3a_MIGRATIONS/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="../../ADAM/6_AUDIT_TRAIL/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="../../ADAM/7_SECURITY/changelog.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

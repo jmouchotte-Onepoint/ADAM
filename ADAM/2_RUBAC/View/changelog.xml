@@ -4,22 +4,22 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
         logicalFilePath="ADAM/2_RUBAC/VIEW/changelog.xml">
 
-    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-RELATIONS">
+    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-RELATIONS" runOnChange="true">
         <comment>RUBAC : Création d'une vue de toute les règles pour les relations</comment>
         <sqlFile path="RUBAC-VIEW-RULES-RELATIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-ROLES">
+    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-ROLES" runOnChange="true">
         <comment>RUBAC : Création d'une vue de toute les règles pour les rôles avec les règles héritées d'un parent</comment>
         <sqlFile path="RUBAC-VIEW-RULES-ROLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-PERMISSIONS">
+    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-PERMISSIONS" runOnChange="true">
         <comment>RUBAC : Création d'une vue de toute les règles pour les permissions avec les règles héritées d'un parent</comment>
         <sqlFile path="RUBAC-VIEW-RULES-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-ALL">
+    <changeSet author="noMemoryLeak" id="RUBAC-VIEW-RULES-ALL" runOnChange="true">
         <comment>RUBAC : Création d'une vue global avec les trois précedents pour avoir une seul source pour la validation // fn_check_all_rules_from_view</comment>
         <sqlFile path="RUBAC-VIEW-RULES-ALL.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

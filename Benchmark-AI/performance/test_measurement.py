@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+# Les modules du harnais forment un espace de noms unique à la racine de
+# Benchmark-AI : on l'ajoute pour que ce script reste exécutable directement.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import unittest
 from unittest.mock import Mock
 from unittest.mock import patch

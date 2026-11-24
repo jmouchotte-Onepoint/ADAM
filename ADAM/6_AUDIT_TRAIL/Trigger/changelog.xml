@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/6_AUDIT_TRAIL/Trigger/changelog.xml">
+
+    <changeSet author="adam" id="AUDIT-TRIGGER-APPEND-ONLY" runOnChange="true">
+        <comment>AUDIT : journal en ajout seul</comment>
+        <sqlFile path="AUDIT-TRIGGER-APPEND-ONLY.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="adam" id="AUDIT-TRIGGER-ATTACH" runOnChange="true">
+        <comment>AUDIT : pose du trigger sur les tables du schéma</comment>
+        <sqlFile path="AUDIT-TRIGGER-ATTACH.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -121,7 +121,17 @@ int main(void)
         goto cleanup;
     }
     PQclear(result);
-    const char *values[] = {subject, tenant, profession};
+    /* Sonde A01 : le client annonce un sujet, un tenant ou une profession qui
+     * ne proviennent pas de son jeton. Le serveur ne doit retenir que ce que
+     * son authentification a établi. */
+    const char *claimed_subject = getenv("ADAM_OAUTH_CLAIM_SUBJECT");
+    const char *claimed_tenant = getenv("ADAM_OAUTH_CLAIM_TENANT");
+    const char *claimed_profession = getenv("ADAM_OAUTH_CLAIM_PROFESSION");
+    const char *values[] = {
+        claimed_subject ? claimed_subject : subject,
+        claimed_tenant ? claimed_tenant : tenant,
+        claimed_profession ? claimed_profession : profession,
+    };
     result = PQexecParams(connection,
         "SELECT set_config('app.adam.user_id',$1,true), "
         "set_config('app.adam.tenant_id',$2,true), "

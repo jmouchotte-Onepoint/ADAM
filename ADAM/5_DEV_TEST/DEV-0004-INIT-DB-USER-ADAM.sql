@@ -21,3 +21,10 @@ GRANT DELETE ON model_rules, relations_rules, roles_rules, permissions_rules TO 
 -- 4. Ajout des tenants
 INSERT INTO tenants_per_users (tenant_id, pg_user) VALUES ('tenant_01', 'adam_test');
 INSERT INTO tenants_per_users (tenant_id, pg_user) VALUES ('tenant_02', 'adam_test');
+
+-- 5. Délégation d'identité (correction OWASP A01)
+-- La variable app.adam.user_id ne fait que choisir parmi les identités
+-- enregistrées ici pour le rôle PostgreSQL ; elle ne peut plus en déclarer une.
+INSERT INTO users_per_pg_user (pg_user, user_id, tenant_id, user_attributes)
+VALUES ('adam_test', 'effecteur-med-1', 'tenant_01', '{}'::jsonb)
+ON CONFLICT DO NOTHING;

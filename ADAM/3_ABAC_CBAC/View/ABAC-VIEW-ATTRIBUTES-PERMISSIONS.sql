@@ -1,4 +1,7 @@
-CREATE OR REPLACE VIEW view_permissions_attributes AS
+-- security_invoker : sinon la vue tourne avec les droits du propriétaire
+-- et saute la RLS des tables dessous (A01-7).
+CREATE OR REPLACE VIEW view_permissions_attributes
+    WITH (security_invoker = true) AS
 SELECT
      p.id,
      rel.attribute

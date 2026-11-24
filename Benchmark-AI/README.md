@@ -25,20 +25,21 @@ test_*.py                    Suites de tests base de données
 check_liquibase_policy.py    Vérification de réapplication de politique
 check_liquibase_migration.py Vérification de migration sur installations reconstituées
 check_oauth_keycloak.py      Scénario OAuth/Keycloak
-compare_authorization.py     Comparaison OpenFGA / SpiceDB
-compare_persistent.py        Comparaison avec stockages persistants
 compare_clinical.py          Rejeu comparatif synthétique T0--T4
-compare_attribute_plans.py   Mesure A/B de l'évaluation des attributs
 check_extended_evaluation.py Tests des deux variantes de l'adaptateur
+owasp/                       Audit OWASP A01 : sondes, régressions, retour arrière
+performance/                 Mesures et comparaisons de performance
 fixtures/                    Archive historique pour la migration
 sql/                         changelog.xml et fixture.sql
 oauth/                       run_oauth.sh et oauth_claim_client.c
 eventb/                      replay_eventb.sh
 ```
 
-Les modules Python restent à plat : ils forment un espace de noms unique
-(`from run import …`, `from support import …`) utilisé par la découverte
-`unittest`.
+`run.py` et `support.py` restent à la racine : ils forment l'espace de noms
+partagé (`from run import …`, `from support import …`). Les deux sous-dossiers
+sont des paquets, donc la découverte `unittest` les parcourt, et les scripts
+qu'ils contiennent ajoutent la racine du harnais à `sys.path` pour rester
+exécutables directement.
 
 ## Testing strategy
 
@@ -53,10 +54,13 @@ Les modules Python restent à plat : ils forment un espace de noms unique
   versus an older repeatable-read snapshot.
 - Acceptance: actual visibility/persistence must match the assertions. A missing
   attribute is different from an SQL error. Failures return exit code 1.
-- Scope gaps for this SQL suite: JWT validation, hostile session-setting
-  changes, arbitrary SQL rules, all write paths, graph cycles, clinical
+- Scope gaps for this SQL suite: all write paths, graph cycles, clinical
   governance, HTTP, Kubernetes, vault, and distributed behavior are not tested.
   The separate local OAuth experiment below covers a bounded Keycloak/JWT path.
+  Hostile session settings, shadowing of the rule relations, the role-prefix
+  check and cross-tenant reads of the policy metadata are covered by the OWASP
+  A01 audit below; the arbitrary SQL carried by `dynamic_rules` is still not
+  fuzzed.
 
 The dedicated container uses local trust authentication to avoid stored test
 passwords. This is only suitable for the disposable localhost-bound test
@@ -106,7 +110,7 @@ the path mapping and explains how each digest file resolves.
 
 The original creation changesets retain the fixes and explicitly accept the
 five identified historical checksums. The transactional changeset in
-`ADAM/3a_MIGRATIONS/` replaces both unique indexes and reapplies the corrected
+`ADAM/1_REBAC_RBAC/REBAC-FIX-UNIQUE-INDEXES.sql` rebuilds both unique indexes on installations that predate `NULLS NOT DISTINCT`, and reapplies the corrected
 attribute wrapper. It was tested on complete reconstructed historical and
 previously consolidated installations and a fresh installation, including
 reapplication. Injected duplicate roles or permissions cause an atomic failure:
@@ -163,6 +167,110 @@ historical policy changeset, not every deployment or migration path. Its
 The nullable-index reproduction attempts a semantic duplicate directly; it does
 not establish every recursive propagation path creates a duplicate.
 
+## OWASP A01 audit
+
+`check_owasp_a01.py` installs two disposable databases from the same changelog,
+one of them without the `2026-owasp-a01-hardening` changeset, and runs the same
+probes against both from a `NOSUPERUSER NOBYPASSRLS` role holding only the
+grants of a tenant application role.
+
+```sh
+uv run --group validation python Benchmark-AI/owasp/check_owasp_a01.py --output Results/local/owasp-a01
+```
+
+Nine probes succeed on the uncorrected installation. Eight are closed by the
+changeset while a reference query confirms that authorized access is unaffected;
+`test_owasp_a01.py` keeps them as regressions and is also collected by
+`unittest` discovery. The retained run is in
+[`Results/owasp-a01/results.json`](../Results/owasp-a01/results.json).
+
+| Probe | Observation on the uncorrected installation | Correction |
+|---|---|---|
+| `A01-1` | `app.adam.user_id` selects any subject | Identity resolved from `users_per_pg_user` for the authenticated principal |
+| `A01-2` | `app.adam.tenant_id` reaches another tenant | Tenant and subject must both be registered for that principal |
+| `A01-3` | `app.adam.user_attributes` declares the attributes an ABAC rule requires | Attributes read from the registered delegation |
+| `A01-4` | A temporary view named `view_all_access_rules` empties rule evaluation | `search_path` pinned with `pg_temp` listed last |
+| `A01-5` | A temporary `dynamic_rules` table replaces the stored rule | Same, plus row-level security on `dynamic_rules` |
+| `A01-6` | `is_allow('delete')` accepts `deleterevil`: `_` is a `LIKE` wildcard | Literal comparison with `starts_with()` |
+| `A01-7` | Another tenant's attribute and rule metadata is readable | Metadata visible only when the parent row is, through `security_invoker` views |
+| `A01-8` | A table owner reads every tenant | Not closable by a policy: reported by `fn_check_runtime_role()` |
+| `A01-9` | A temporary `model` table makes the write triggers derive a permission the configured model does not define | Every function of the schema carries a pinned `search_path`, swept from the catalogue rather than from a list |
+
+`A01-8` remains open by construction. PostgreSQL exempts a table owner from its
+own row-level security, and `FORCE ROW LEVEL SECURITY` is not a boundary against
+that owner, who can remove it. The control is therefore a deployment invariant:
+`fn_check_runtime_role('<role>')` returns one row per violation — superuser,
+`BYPASSRLS`, membership of such a role, or ownership of a table carrying
+row-level security — and no row for a conforming application role.
+
+## Authorization audit trail
+
+`ADAM/6_AUDIT_TRAIL/` records every committed write to the
+authorization tables in an append-only log, `audit_log`, chained per tenant with
+SHA-256. The trigger is attached by enumerating the schema's tables from the
+catalogue, and each attachment is recorded in `audit_coverage`, so the coverage
+can be checked instead of assumed. The module follows the layout of the rest of
+the core: tables, then `Function/`, `Policy/`, `Trigger/`, and a final sweep that
+pins `search_path` on the functions it adds.
+
+Coverage and chain state are readable from SQL:
+
+```sql
+SELECT table_name FROM adam.audit_coverage ORDER BY 1;
+SELECT * FROM adam.fn_verify_audit_chain();     -- one row per tenant chain
+```
+
+| Property | Mechanism |
+|---|---|
+| Coverage | One `AFTER INSERT OR UPDATE OR DELETE` trigger per table of the schema, listed in `audit_coverage`. Rows written indirectly, by the derivation triggers or by a foreign-key cascade, are recorded like direct writes |
+| Append-only | No write policy and no grant on `audit_log`; a trigger refuses `UPDATE`, `DELETE` and `TRUNCATE`; only the `SECURITY DEFINER` appender inserts |
+| Identity | `system_user` and `session_user`, which the server establishes and `SET ROLE` does not change. A caller-set `app.adam.user_id` is recorded only when it matches a registered delegation |
+| Tenant scope | Row-level security limits reads to the current tenant; entries for objects without a tenant are filed under `*` and are visible to the schema owner only |
+| Detection | `fn_verify_audit_chain()` recomputes each chain and returns the identifier of the first entry that does not match |
+| Decisions | `fn_log_decision()` is the only entry point open to the application, and can write `DECISION` entries only |
+
+Limits: the log records committed changes, so a rolled-back attempt leaves no
+entry; an access decision is recorded only when the caller invokes
+`fn_log_decision()`, since a `SELECT` policy cannot write; the owner of the
+tables can detach the trigger, which the chain makes detectable but does not
+prevent; external vault anchoring is not implemented. Chaining serializes the
+writes of one tenant through `audit_chain_head`, which is a deliberate cost of
+the detection property; a transaction writing to both a tenant chain and the
+tenant-less chain locks two heads, so two transactions doing so in opposite
+orders can deadlock and PostgreSQL aborts one of them.
+
+```sh
+uv run --group validation python -m unittest discover -s Benchmark-AI -p 'test_audit_trail.py' -v
+```
+
+### Cost, measured one variable at a time
+
+`compare_audit_cost.py` installs the same changelog three times in separate
+containers — without the hardening and without the audit trail, with the
+hardening alone, with both — and measures 300 individually timed graph
+insertions and 100 protected reads on each:
+
+```sh
+uv run --group validation python Benchmark-AI/performance/compare_audit_cost.py --output Results/local/audit-cost
+```
+
+The retained run is in [`Results/adam/audit-cost/results.json`](../Results/adam/audit-cost/results.json), and the full 1,000-seed campaign on the final artifact in [`Results/adam/audit-trail-1000/`](../Results/adam/audit-trail-1000/).
+
+| Variant | Graph insertion p50 | Protected read p50 |
+|---|---|---|
+| Corrections reverted, no trail | 0.759 ms | 1.453 ms |
+| Corrections, no trail | 0.979 ms (x1.29) | 40.849 ms (x28.1) |
+| Corrections + trail | 1.866 ms (x1.91) | 41.758 ms (x1.02) |
+
+The audit trail costs about a factor of two on the write path it records and
+nothing on reads, which it does not record; it stores 8,431 entries and 7.9 MB
+for 300 seeded relations, roughly 28 entries and 26 kB per relation, since each
+entry keeps the row before and after. The read cost belongs to the hardening,
+specifically to the `security_invoker` views of `A01-7`: the view no longer runs
+with the owner's rights, so a read now pays the row-level security of the
+metadata tables beneath it. That median matches the baseline of the attribute
+A/B experiment, whose candidate wrapper reaches 0.206 ms on the same fixture.
+
 ## Local Keycloak / PostgreSQL OAuth experiment
 
 This is a test-only identity integration, not the application backend. It uses
@@ -210,14 +318,24 @@ negative cases. The other realm has a different signing key as well as a
 different issuer, so that case does not independently isolate issuer checking.
 Results are correctness checks, not latency measurements.
 
-**Trust boundary:** PostgreSQL session settings can be changed by a connected
-SQL client. The prototype is safe to interpret only under its restricted local
-boundary; it does not prevent an untrusted client with database access from
-setting another identity or bypassing the test client. A real deployment must
-restrict database access to its trusted service, prohibit arbitrary client SQL,
-secure credential and network handling, and test its connection pool and
-transaction cleanup. Token authentication occurs at connection time and is
-not automatically repeated for a long-lived connection. Production suitability,
+Three further cases announce a subject, tenant or profession that the presented
+token does not carry: the client applies `ADAM_OAUTH_CLAIM_SUBJECT`,
+`ADAM_OAUTH_CLAIM_TENANT` or `ADAM_OAUTH_CLAIM_PROFESSION` in place of the
+verified claim. Each is denied, because the delegations are keyed on the subject
+PostgreSQL itself authenticated and exposes through `system_user`, not on what
+the client announces.
+
+**Trust boundary:** PostgreSQL session settings can still be changed by any
+connected SQL client, but since the A01 changeset they no longer carry identity:
+`app.adam.user_id`, `app.adam.tenant_id` and `app.adam.user_attributes` only
+select among the delegations registered for the authenticated principal. A
+client with database access can therefore no longer assume an identity it has
+not been granted — see the audit above and `test_owasp_a01.py`. The remaining
+boundary conditions are unchanged: the application role must not own the ADAM
+tables or hold `BYPASSRLS` (`fn_check_runtime_role()`), token authentication
+occurs at connection time and is not repeated for a long-lived connection, and
+credential handling, network handling, connection pooling and transaction
+cleanup remain the deployment's responsibility. Production suitability,
 revocation behavior, deployment, full validator assurance, and all policy
 configurations remain unproven.
 
@@ -280,7 +398,7 @@ installation is needed beyond Docker and the validation dependencies.
 From the `Code` directory:
 
 ```sh
-uv run --group validation python Benchmark-AI/compare_authorization.py \
+uv run --group validation python Benchmark-AI/performance/compare_authorization.py \
   --output Results/local/new-comparison-1000 --seeds 1000
 ```
 
@@ -314,7 +432,7 @@ workloads or support a general speedup claim.
 The manuscript additionally reports the stronger persistent-store experiment:
 
 ```sh
-uv run --locked --group validation python Benchmark-AI/compare_persistent.py \
+uv run --locked --group validation python Benchmark-AI/performance/compare_persistent.py \
   --output Results/local/persistent-1000 --seeds 1000
 ```
 
@@ -344,7 +462,7 @@ delegation window to elapse.
 ## Attribute evaluation A/B experiment
 
 ```sh
-uv run --locked --group validation python Benchmark-AI/compare_attribute_plans.py \
+uv run --locked --group validation python Benchmark-AI/performance/compare_attribute_plans.py \
   --seeds 10000 --samples 30 --output Results/local/attribute-ab-10000
 uv run --locked --group validation python Benchmark-AI/check_extended_evaluation.py \
   --output Results/local/extended-evaluation.json

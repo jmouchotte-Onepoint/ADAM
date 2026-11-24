@@ -1,0 +1,16 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/6_AUDIT_TRAIL/changelog.xml">
+
+    <changeSet author="adam" id="AUDIT-TABLES" runOnChange="true">
+        <comment>AUDIT : journal, tête de chaîne et registre de couverture</comment>
+        <sqlFile path="AUDIT-TABLES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <include file="Function/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="Policy/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="Trigger/changelog.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

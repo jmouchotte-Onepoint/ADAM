@@ -269,6 +269,18 @@ SELECT id, '[{"key":"profession","operator":"IS","value":["nurse"]}]'::jsonb
 FROM permissions WHERE object_id='parcours-oauth' AND relation='can_read';
 COMMIT;
 """)
+            # Le sujet OAuth validé par PostgreSQL (system_user = 'oauth:<sub>')
+            # est le principal des liaisons : le client choisit parmi elles avec
+            # app.adam.user_id, il ne peut ni en inventer une ni se déclarer une
+            # profession ou un tenant qui n'y figurent pas.
+            sql.append("".join(
+                "INSERT INTO users_per_pg_user(pg_user, user_id, tenant_id, user_attributes) "
+                f"VALUES ('{subject}', '{subject}', '{tenant}', "
+                f"""'{json.dumps({"profession": profession})}'::jsonb) """
+                "ON CONFLICT DO NOTHING;\n"
+                for subject, tenant, profession in USERS.values()
+                if tenant and profession
+            ))
             docker("exec", "-i", postgres, "psql", "-X", "-v", "ON_ERROR_STOP=1",
                    "-U", "postgres", "-d", "validation", input_text="\n".join(sql))
             conninfo = (
@@ -278,10 +290,15 @@ COMMIT;
             )
 
             def decide(label: str, bearer: str, expected: str | int,
-                       diagnostic: str | None = None) -> None:
+                       diagnostic: str | None = None, claimed: dict | None = None) -> None:
                 previous_logs = docker("logs", postgres).stderr if diagnostic else ""
+                overrides = [
+                    argument
+                    for name, value in (claimed or {}).items()
+                    for argument in ("--env", f"ADAM_OAUTH_CLAIM_{name.upper()}={value}")
+                ]
                 result = docker(
-                    "exec", "-i", "--env", f"ADAM_OAUTH_CONNINFO={conninfo}",
+                    "exec", "-i", "--env", f"ADAM_OAUTH_CONNINFO={conninfo}", *overrides,
                     postgres, "/tmp/client", input_text=bearer + "\n", check=False,
                 )
                 if isinstance(expected, int):
@@ -304,6 +321,14 @@ COMMIT;
             decide("wrong profession", token("doctor"), "0")
             decide("wrong tenant", token("wrong-tenant"), "0")
             decide("other subject", token("other-subject"), "0")
+            # OWASP A01 : le porteur d'un jeton valide tente d'endosser le sujet
+            # autorisé, puis de se déclarer la profession attendue.
+            decide("subject claimed beyond the token", token("other-subject"), "0",
+                   claimed={"subject": USERS["nurse"][0]})
+            decide("profession claimed beyond the token", token("doctor"), "0",
+                   claimed={"profession": "nurse"})
+            decide("tenant claimed beyond the token", token("wrong-tenant"), "0",
+                   claimed={"tenant": "tenantA"})
             decide("missing profession", token("missing-profession"), 3)
             decide("missing tenant", token("missing-tenant"), 3)
             decide("unmapped identity", token("unmapped"), 2)

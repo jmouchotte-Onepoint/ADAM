@@ -16,6 +16,8 @@ class EventBSQLCorrespondenceTests(DatabaseTest):
             self.admin.execute(
                 "INSERT INTO tenants_per_users(tenant_id,pg_user) VALUES ('tenantB','read_validation')"
             )
+            for subject, tenant in subjects.items():
+                self.delegate(subject, tenant)
             for record, tenant in records.items():
                 self.admin.execute(
                     "INSERT INTO protected_records(id,tenant_id) VALUES (%s,%s)", (record, tenant)

@@ -15,11 +15,17 @@
         <sqlFile path="INIT-TENANTS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
+    <changeSet author="adam" id="USERS-PER-PG-USER" runOnChange="true">
+        <comment>INIT : délégation du rôle PostgreSQL vers le sujet applicatif</comment>
+        <sqlFile path="INIT-USERS-PER-PG-USER.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
     <changeSet author="noMemoryLeak" id="PG-USER">
         <comment>INIT : Ajout des attributs pour le users qui va initier le schema</comment>
         <sqlFile path="INIT-VALUES-PG-USER.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
     <include file="Function/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="Policy/changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

@@ -9,9 +9,14 @@
         <sqlFile path="INIT-GET-TENANT-ID.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="INIT-GET-USER-INFOS">
+    <changeSet author="noMemoryLeak" id="INIT-GET-USER-INFOS" runOnChange="true">
         <comment>INIT : Fonction safe pour récupérer les infos de session d'un pg_user</comment>
         <sqlFile path="INIT-GET-USER-INFOS.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet author="adam" id="INIT-CHECK-RUNTIME-ROLE" runOnChange="true">
+        <comment>INIT : invariant de déploiement du rôle applicatif</comment>
+        <sqlFile path="INIT-CHECK-RUNTIME-ROLE.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
 </databaseChangeLog>

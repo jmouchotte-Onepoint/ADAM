@@ -8,9 +8,10 @@
     <include file="1_REBAC_RBAC/changelog.xml" relativeToChangelogFile="true"/>
     <include file="2_RUBAC/changelog.xml" relativeToChangelogFile="true"/>
     <include file="3_ABAC_CBAC/changelog.xml" relativeToChangelogFile="true"/>
-    <include file="3a_MIGRATIONS/changelog.xml" relativeToChangelogFile="true"/>
     <include file="4_INSERT/changelog.xml" relativeToChangelogFile="true"/>
     <include file="5_DEV_TEST/changelog.xml" context="dev" relativeToChangelogFile="true"/>
+    <include file="6_AUDIT_TRAIL/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="7_SECURITY/changelog.xml" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>

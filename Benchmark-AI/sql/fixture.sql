@@ -12,6 +12,19 @@ ALTER TABLE protected_records FORCE ROW LEVEL SECURITY;
 
 INSERT INTO tenants(id, name) VALUES ('tenantA', 'Validation A'), ('tenantB', 'Validation B');
 INSERT INTO tenants_per_users(tenant_id, pg_user) VALUES ('tenantA', 'read_validation');
+-- Délégation du rôle PostgreSQL vers le sujet applicatif et ses attributs.
+-- Le bloc est conditionnel : le même fixture sert aussi aux installations
+-- historiques reconstituées par check_liquibase_migration.py, antérieures à la
+-- correction A01.
+DO $fixture$
+BEGIN
+    IF to_regclass('users_per_pg_user') IS NOT NULL THEN
+        INSERT INTO users_per_pg_user(pg_user, user_id, tenant_id, user_attributes)
+        VALUES ('read_validation', 'nurse', 'tenantA', '{}'::jsonb)
+        ON CONFLICT DO NOTHING;
+    END IF;
+END;
+$fixture$;
 GRANT USAGE ON SCHEMA adam, parcours TO read_validation;
 GRANT SELECT ON ALL TABLES IN SCHEMA adam TO read_validation;
 GRANT SELECT, UPDATE, DELETE ON protected_records TO read_validation;

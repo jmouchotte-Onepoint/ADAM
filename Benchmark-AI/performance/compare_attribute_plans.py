@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+# Les modules du harnais forment un espace de noms unique à la racine de
+# Benchmark-AI : on l'ajoute pour que ce script reste exécutable directement.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
@@ -10,7 +17,7 @@ from uuid import uuid4
 
 import psycopg
 
-from compare_authorization import IMAGES, setup_postgres, start_container
+from performance.compare_authorization import IMAGES, setup_postgres, start_container
 from run import FIXTURE, ROOT, server_execution_ms, summarize, tests
 from support import connect
 
@@ -130,7 +137,7 @@ def main() -> None:
                               for p in files + [Path(__file__).resolve(),
                                                 ROOT / "Benchmark-AI/run.py",
                                                 ROOT / "Benchmark-AI/support.py",
-                                                ROOT / "Benchmark-AI/compare_authorization.py"]},
+                                                ROOT / "Benchmark-AI/performance/compare_authorization.py"]},
             "image_id": subprocess.check_output(
                 ["docker", "inspect", name, "--format", "{{.Image}}"], text=True).strip(),
         }

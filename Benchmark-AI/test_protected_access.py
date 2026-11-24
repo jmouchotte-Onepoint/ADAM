@@ -44,10 +44,9 @@ class ProtectedAccessTests(DatabaseTest):
             (permission, json.dumps(rule)),
         )
         self.assertFalse(self.visible())
-        self.app.execute(
-            "SELECT set_config('app.adam.user_attributes', %s, false)",
-            (json.dumps({"profession": "nurse"}),),
-        )
+        # L'attribut provient de la délégation enregistrée, pas d'une déclaration
+        # faite par la session : voir test_owasp_a01.py pour le contre-exemple.
+        self.delegate("nurse", attributes={"profession": "nurse"})
         self.assertTrue(self.visible())
 
     def test_consent_and_expiration_without_cleanup(self) -> None:

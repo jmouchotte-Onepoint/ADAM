@@ -1,4 +1,3 @@
-import json
 from uuid import UUID
 
 from psycopg import sql
@@ -19,10 +18,12 @@ class ClinicalReplayTests(DatabaseTest):
                 )
 
             def identity(subject: str, attributes: dict | None = None) -> None:
+                # Le sujet et ses attributs sont enregistrés comme délégation du
+                # rôle PostgreSQL ; la variable de session ne fait que désigner
+                # laquelle de ces identités la requête utilise.
+                self.delegate(subject, attributes=attributes)
                 self.app.execute(
-                    "SELECT set_config('app.adam.user_id',%s,false), "
-                    "set_config('app.adam.user_attributes',%s,false)",
-                    (subject, json.dumps(attributes or {})),
+                    "SELECT set_config('app.adam.user_id',%s,false)", (subject,)
                 )
 
             def grant(subject: str, record: str) -> UUID:

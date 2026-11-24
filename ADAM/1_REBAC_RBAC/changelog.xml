@@ -27,6 +27,11 @@
         <sqlFile path="REBAC-PERMISSIONS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
+    <changeSet author="adam" id="REBAC-FIX-UNIQUE-INDEXES" runOnChange="true">
+        <comment>REBAC : rattrapage des index d'unicité installés avant NULLS NOT DISTINCT</comment>
+        <sqlFile path="REBAC-FIX-UNIQUE-INDEXES.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
     <include file="Recursive/changelog.xml" relativeToChangelogFile="true"/>
     <include file="Function/changelog.xml" relativeToChangelogFile="true"/>
     <include file="Trigger/changelog.xml" relativeToChangelogFile="true"/>

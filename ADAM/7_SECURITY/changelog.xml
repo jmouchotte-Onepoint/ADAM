@@ -1,0 +1,12 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        logicalFilePath="ADAM/7_SECURITY/changelog.xml">
+
+    <changeSet author="adam" id="SECURITY-SEARCH-PATH" runOnChange="true">
+        <comment>SECURITE : search_path figé sur les fonctions du schéma</comment>
+        <sqlFile path="SECURITY-SEARCH-PATH.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+</databaseChangeLog>

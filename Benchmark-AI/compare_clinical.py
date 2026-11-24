@@ -3,7 +3,7 @@ from uuid import UUID
 
 import psycopg
 
-from compare_authorization import API
+from performance.compare_authorization import API
 from support import connect
 
 

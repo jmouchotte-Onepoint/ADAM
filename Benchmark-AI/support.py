@@ -1,3 +1,4 @@
+import json
 import os
 import unittest
 from uuid import uuid4
@@ -21,9 +22,36 @@ def connect(*, application: bool = False, autocommit: bool = True) -> psycopg.Co
     return connection
 
 
+def delegate(
+    admin: psycopg.Connection,
+    user_id: str,
+    tenant_id: str = "tenantA",
+    attributes: dict | None = None,
+    principal: str = "read_validation",
+) -> None:
+    """Autorise `principal` à agir comme `user_id` dans `tenant_id`.
+
+    Les variables de session continuent de choisir le sujet d'une requête ;
+    elles ne peuvent sélectionner qu'une identité enregistrée ici.
+    """
+    admin.execute(
+        "INSERT INTO users_per_pg_user(pg_user, user_id, tenant_id, user_attributes) "
+        "VALUES (%s, %s, %s, %s::jsonb) "
+        "ON CONFLICT (pg_user, tenant_id, user_id) "
+        "DO UPDATE SET user_attributes = EXCLUDED.user_attributes",
+        (principal, user_id, tenant_id, json.dumps(attributes or {})),
+    )
+
+
+def reset_delegations(admin: psycopg.Connection, principal: str = "read_validation") -> None:
+    admin.execute("DELETE FROM users_per_pg_user WHERE pg_user = %s", (principal,))
+    delegate(admin, "nurse", principal=principal)
+
+
 class DatabaseTest(unittest.TestCase):
     def setUp(self) -> None:
         self.admin = connect()
+        reset_delegations(self.admin)
         self.app = connect(application=True)
         self.record = "parcours-" + uuid4().hex
         self.admin.execute(
@@ -46,7 +74,12 @@ class DatabaseTest(unittest.TestCase):
         self.admin.execute("DELETE FROM relations WHERE object_id = %s", (self.record,))
         self.admin.execute("DELETE FROM protected_records WHERE id = %s", (self.record,))
         self.admin.execute("DELETE FROM parcours.etapes WHERE id = %s", (self.record,))
+        reset_delegations(self.admin)
         self.admin.close()
+
+    def delegate(self, user_id: str, tenant_id: str = "tenantA",
+                 attributes: dict | None = None) -> None:
+        delegate(self.admin, user_id, tenant_id, attributes)
 
     def visible(self, connection: psycopg.Connection | None = None) -> bool:
         connection = connection if connection is not None else self.app

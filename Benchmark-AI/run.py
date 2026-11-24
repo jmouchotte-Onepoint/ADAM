@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 
 import psycopg
 
-from support import connect
+from support import connect, delegate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,6 +85,10 @@ def benchmark(output: Path, count: int, *, server_timing: bool = False) -> dict:
     rows: list[dict] = []
     samples: list[dict] = []
     with connect() as admin:
+        # Depuis la correction A01, les attributs d'une décision proviennent de la
+        # délégation enregistrée, plus de la variable de session : la profession
+        # exigée par la contrainte ABAC posée plus bas doit donc être déclarée ici.
+        delegate(admin, "nurse", "tenantA", {"profession": "nurse"})
         ids = ["bench-" + str(i) for i in range(count)]
         admin.execute(
             "INSERT INTO protected_records(id, tenant_id) SELECT 'bench-' || i, 'tenantA' "

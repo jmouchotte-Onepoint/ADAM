@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+# Les modules du harnais forment un espace de noms unique à la racine de
+# Benchmark-AI : on l'ajoute pour que ce script reste exécutable directement.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
@@ -13,7 +20,7 @@ from uuid import uuid4
 
 import psycopg
 
-from compare_authorization import (
+from performance.compare_authorization import (
     API, IMAGES, TEST_KEY, docker, fga_check, setup_openfga, setup_postgres,
     setup_spicedb, spice_check, sql_check, start_container, verify_decisions,
     verify_revocation, wait_for_port,
@@ -175,7 +182,7 @@ def main() -> None:
                        for system, name in names.items()},
             "source_sha256": {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
                               for path in files + [Path(__file__).resolve(),
-                                                   ROOT / "Benchmark-AI/compare_authorization.py",
+                                                   ROOT / "Benchmark-AI/performance/compare_authorization.py",
                                                    ROOT / "Benchmark-AI/compare_clinical.py"]},
             "correctness": "allow, absent record, other subject, other tenant, revocation and unaffected record pass",
             "clinical_replay": clinical,

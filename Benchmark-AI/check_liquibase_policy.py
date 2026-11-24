@@ -35,6 +35,12 @@ def main() -> None:
             for path in sql_files(CHANGELOG):
                 db.execute(path.read_text())
             db.execute((FIXTURE).read_text())
+            # Le scénario oppose deux sujets délégués au même rôle PostgreSQL :
+            # il mesure la politique, pas la résolution d'identité.
+            db.execute(
+                "INSERT INTO users_per_pg_user(pg_user, user_id, tenant_id) "
+                "VALUES ('read_validation','other-user','tenantA') ON CONFLICT DO NOTHING"
+            )
             db.execute("INSERT INTO parcours.etapes(id, tenant_id) VALUES ('parcours-liquibase', 'tenantA')")
             db.execute(
                 "INSERT INTO relations(user_type,user_id,relation,object_type,object_id,tenant_id) "

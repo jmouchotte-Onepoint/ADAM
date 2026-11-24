@@ -21,8 +21,11 @@ LIQUIBASE_IMAGE = "liquibase/liquibase:4.32.0"
 def baseline_changelog(destination: Path) -> None:
     tree = ET.parse(CHANGELOG)
     root = tree.getroot()
-    migration = next(node for node in root if node.attrib.get("file", "").endswith("3a_MIGRATIONS/changelog.xml"))
-    root.remove(migration)
+    # L'installation consolidée précède le journal d'audit et le figeage du
+    # search_path : ces deux couches sont ce que la montée de version ajoute.
+    for layer in ("6_AUDIT_TRAIL/changelog.xml", "7_SECURITY/changelog.xml"):
+        node = next(n for n in root if n.attrib.get("file", "").endswith(layer))
+        root.remove(node)
     ET.register_namespace("", "http://www.liquibase.org/xml/ns/dbchangelog")
     target = destination / "Benchmark-AI/sql/changelog.xml"
     target.parent.mkdir(parents=True)
