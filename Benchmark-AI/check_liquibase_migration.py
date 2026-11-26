@@ -122,7 +122,8 @@ def check_legacy(port: str, baseline: Path) -> None:
         definition = db.execute(
             "SELECT pg_get_functiondef('fn_check_all_attributes_from_view(uuid,text,jsonb)'::regprocedure)"
         ).fetchone()[0]
-        if "v_record.attribute" not in definition or "Unsupported relation type" not in definition:
+        if ("fn_check_attributes(p_user_attributes, attribute)" not in definition
+                or "Unsupported relation type" not in definition):
             raise AssertionError("Corrected attribute wrapper missing")
     print("PASS: historical upgrade rejects duplicates atomically, preserves data and is repeatable", flush=True)
 
@@ -174,7 +175,6 @@ def main() -> None:
             print("PASS: fresh installation and re-execution", flush=True)
         finally:
             subprocess.run(["docker", "rm", "--force", name], check=True, stdout=subprocess.DEVNULL)
-
 
 if __name__ == "__main__":
     main()

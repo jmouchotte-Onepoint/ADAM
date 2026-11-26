@@ -5,22 +5,16 @@ CREATE OR REPLACE FUNCTION fn_check_all_rules_from_view(
 )
 
 RETURNS BOOLEAN AS $$
-DECLARE
-    v_record RECORD;
 BEGIN
 
-    -- Parcourt toutes les règles pour cette permission depuis la table paramétrable
-    FOR v_record IN EXECUTE 'SELECT * FROM view_all_access_rules WHERE id = $1 AND relation_type = $2' USING p_id, p_relation_type
-        LOOP
-            -- Vérifie les règles d'accès des attributs
-            IF NOT fn_check_dynamic_rules(v_record.rule_id, p_user_attributes) THEN
-                RETURN FALSE;
-            END IF;
-        END LOOP;
-
-    -- Si aucune règle trouvée ou toutes validées → accès autorisé
-    RETURN TRUE;
+    RETURN NOT EXISTS (
+        SELECT 1
+          FROM view_all_access_rules
+         WHERE id = p_id
+           AND relation_type = p_relation_type
+           AND NOT fn_check_dynamic_rules(rule_id, p_user_attributes)
+    );
 END;
 -- SECURITY INVOKER : les vues étant en security_invoker, l'évaluation n'a
 -- plus besoin des droits du propriétaire (A01-4/7).
-$$ LANGUAGE plpgsql SECURITY INVOKER STABLE PARALLEL SAFE;
+$$ LANGUAGE plpgsql SECURITY INVOKER STABLE PARALLEL SAFE COST 10000;

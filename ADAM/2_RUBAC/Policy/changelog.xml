@@ -9,7 +9,7 @@
         <sqlFile path="RUBAC-POLICY-RULES-ADD-RLS.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
-    <changeSet author="noMemoryLeak" id="RUBAC-POLICY-RULES-MODEL">
+    <changeSet author="noMemoryLeak" id="RUBAC-POLICY-RULES-MODEL" runOnChange="true">
         <comment>POLICY-RUBAC : Création d'une table pour ajouter des règles sur la création d'une relation selon une règle du model</comment>
         <sqlFile path="RUBAC-POLICY-RULES-MODEL.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

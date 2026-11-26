@@ -4,7 +4,7 @@ from uuid import UUID
 import psycopg
 
 from performance.compare_authorization import API
-from support import connect
+from support import connect, delegate
 
 
 def replay(fga: API, spice: API) -> list[dict]:
@@ -56,6 +56,9 @@ def replay(fga: API, spice: API) -> list[dict]:
 
     def check(label: str, user: str, record: str, operation: str, expected: bool,
               attributes: dict | None = None) -> None:
+        # Depuis le durcissement A01, le sujet et ses attributs viennent de la
+        # délégation enregistrée ; la variable de session ne fait que choisir.
+        delegate(admin, user, "tenantA", attributes or {})
         with connect(application=True) as db:
             db.execute("SELECT set_config('app.adam.user_id',%s,false), "
                        "set_config('app.adam.user_attributes',%s,false)",

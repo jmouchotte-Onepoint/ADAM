@@ -4,7 +4,7 @@ from support import DatabaseTest
 
 
 class AttributeEquivalenceTests(DatabaseTest):
-    def test_targeted_wrapper_matches_view_for_local_and_inherited_constraints(self) -> None:
+    def test_three_predicate_forms_agree_for_local_and_inherited_constraints(self) -> None:
         permission = self.admin.execute(
             "SELECT id FROM permissions WHERE parent_relation_id=%s AND relation='can_read'",
             (self.seed,),
@@ -13,15 +13,19 @@ class AttributeEquivalenceTests(DatabaseTest):
         emergency = json.dumps([{"key": "emergency", "operator": "IS", "value": ["true"]}])
 
         def compare(attributes: dict, expected: bool) -> None:
+            payload = json.dumps(attributes)
             row = self.app.execute(
                 """SELECT
                    NOT EXISTS (SELECT 1 FROM view_all_access_attributes a
                                WHERE a.id=%s AND a.relation_type='permissions'
                                AND fn_check_attributes(%s::jsonb,a.attribute) IS NOT TRUE),
+                   (SELECT count(*) FROM view_all_access_attributes a
+                     WHERE a.relation_type='permissions' AND a.id=%s
+                       AND fn_check_attributes(%s::jsonb,a.attribute) IS NOT TRUE) = 0,
                    fn_check_all_attributes_from_view(%s,'permissions',%s::jsonb) IS TRUE""",
-                (permission, json.dumps(attributes), permission, json.dumps(attributes)),
+                (permission, payload, permission, payload, permission, payload),
             ).fetchone()
-            self.assertEqual(row, (expected, expected))
+            self.assertEqual(row, (expected, expected, expected))
 
         compare({}, True)
         self.admin.execute(

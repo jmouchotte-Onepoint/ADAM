@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
         logicalFilePath="ADAM/0_INIT/RULES/changelog.xml">
 
-    <changeSet author="noMemoryLeak" id="INIT-GET-TENANT-ID">
+    <changeSet author="noMemoryLeak" id="INIT-GET-TENANT-ID" runOnChange="true">
         <comment>INIT : Fonction safe pour récupérer le tenant dans les RLS</comment>
         <sqlFile path="INIT-GET-TENANT-ID.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>

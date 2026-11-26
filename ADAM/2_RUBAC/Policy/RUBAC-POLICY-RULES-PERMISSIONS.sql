@@ -6,7 +6,7 @@ CREATE POLICY policy_insert_permissions_rules
     WITH CHECK (
         permission_id IS NOT NULL
         AND rule_id IS NOT NULL
-        AND get_current_user_id() IS NOT NULL
+        AND (SELECT get_current_user_id()) IS NOT NULL
 );
 
 -- 2. Select : une ligne de métadonnée n'est visible que si sa ligne
@@ -16,7 +16,7 @@ CREATE POLICY policy_select_permissions_rules
     ON permissions_rules
     FOR SELECT
     USING (
-        get_current_user_id() IS NOT NULL
+        (SELECT get_current_user_id()) IS NOT NULL
         AND EXISTS (SELECT 1 FROM permissions AS parent WHERE parent.id = permission_id)
 );
 
@@ -27,5 +27,5 @@ CREATE POLICY policy_delete_permissions_rules
     FOR DELETE
     USING (
         is_allow('delete')
-        AND get_current_user_id() IS NOT NULL
+        AND (SELECT get_current_user_id()) IS NOT NULL
 );

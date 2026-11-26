@@ -44,13 +44,13 @@ FROM generate_series(1, 21) i;
 
 -- Experimental adapter, not a replacement for the repository-generated policy.
 CREATE POLICY validation_select ON protected_records FOR SELECT TO read_validation USING (
-    tenant_id = get_current_tenant_id()
+    tenant_id = (SELECT get_current_tenant_id())
     AND consent
     AND EXISTS (
         SELECT 1 FROM permissions p
         JOIN relations source ON source.id = p.parent_relation_id
         WHERE p.user_type = 'users'
-          AND p.user_id = get_current_user_id()
+          AND p.user_id = (SELECT get_current_user_id())
           AND p.object_type = 'etapes'
           AND p.object_id = protected_records.id
           AND p.tenant_id = protected_records.tenant_id
@@ -58,30 +58,30 @@ CREATE POLICY validation_select ON protected_records FOR SELECT TO read_validati
           AND p.allow_deny IS TRUE AND source.allow_deny IS TRUE
           AND (p.expires_at IS NULL OR p.expires_at > statement_timestamp())
           AND (source.expires_at IS NULL OR source.expires_at > statement_timestamp())
-          AND NOT EXISTS (
-              SELECT 1 FROM view_all_access_attributes a
-              WHERE a.id = p.id AND a.relation_type = 'permissions'
-                AND fn_check_attributes(get_current_user_attributes(), a.attribute) IS NOT TRUE
-          )
-          AND fn_check_all_rules_from_view(p.id, 'permissions', get_current_user_attributes()) IS TRUE
+          AND (
+              SELECT count(*) FROM view_all_access_attributes a
+              WHERE a.relation_type = 'permissions' AND a.id = p.id
+                AND fn_check_attributes((SELECT get_current_user_attributes()), a.attribute) IS NOT TRUE
+          ) = 0
+          AND fn_check_all_rules_from_view(p.id, 'permissions', (SELECT get_current_user_attributes())) IS TRUE
     )
 );
 CREATE POLICY validation_update ON protected_records FOR UPDATE TO read_validation
 USING (
-    tenant_id = get_current_tenant_id() AND consent
+    tenant_id = (SELECT get_current_tenant_id()) AND consent
     AND EXISTS (
         SELECT 1 FROM permissions p JOIN relations source ON source.id = p.parent_relation_id
-        WHERE p.user_id = get_current_user_id() AND p.user_type = 'users'
+        WHERE p.user_id = (SELECT get_current_user_id()) AND p.user_type = 'users'
           AND p.object_id = protected_records.id AND p.object_type = 'etapes'
           AND p.tenant_id = protected_records.tenant_id AND p.relation = 'can_write'
           AND p.allow_deny IS TRUE AND source.allow_deny IS TRUE
           AND (source.expires_at IS NULL OR source.expires_at > statement_timestamp())
           AND (p.expires_at IS NULL OR p.expires_at > statement_timestamp())
-          AND NOT EXISTS (
-              SELECT 1 FROM view_all_access_attributes a
-              WHERE a.id = p.id AND a.relation_type = 'permissions'
-                AND fn_check_attributes(get_current_user_attributes(), a.attribute) IS NOT TRUE
-          )
-          AND fn_check_all_rules_from_view(p.id, 'permissions', get_current_user_attributes()) IS TRUE
+          AND (
+              SELECT count(*) FROM view_all_access_attributes a
+              WHERE a.relation_type = 'permissions' AND a.id = p.id
+                AND fn_check_attributes((SELECT get_current_user_attributes()), a.attribute) IS NOT TRUE
+          ) = 0
+          AND fn_check_all_rules_from_view(p.id, 'permissions', (SELECT get_current_user_attributes())) IS TRUE
     )
-) WITH CHECK (tenant_id = get_current_tenant_id() AND consent);
+) WITH CHECK (tenant_id = (SELECT get_current_tenant_id()) AND consent);

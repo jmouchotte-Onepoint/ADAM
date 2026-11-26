@@ -1,6 +1,8 @@
 CREATE OR REPLACE FUNCTION get_current_tenant_id()
     RETURNS text
     LANGUAGE SQL
+    STABLE
+    PARALLEL SAFE
     SECURITY INVOKER
 AS $$
   SELECT tenant_id

@@ -5,6 +5,7 @@ CREATE OR REPLACE FUNCTION get_authenticated_principal()
 RETURNS TEXT
 LANGUAGE SQL
 STABLE
+PARALLEL SAFE
 AS $$
     SELECT CASE
         WHEN system_user LIKE 'oauth:%' THEN substring(system_user FROM 7)
@@ -29,7 +30,7 @@ RETURNS TEXT AS $$
                               FROM users_per_pg_user AS binding
                              WHERE binding.pg_user = get_authenticated_principal()))
     );
-$$ LANGUAGE SQL STABLE SECURITY INVOKER;
+$$ LANGUAGE SQL STABLE PARALLEL SAFE SECURITY INVOKER;
 
 -- 3. Attributs du sujet
 -- Pris dans la liaison. Pas de liaison : objet vide, donc toute contrainte ABAC
@@ -45,7 +46,7 @@ RETURNS JSONB AS $$
           LIMIT 1),
         '{}'::jsonb
     );
-$$ LANGUAGE SQL STABLE SECURITY INVOKER;
+$$ LANGUAGE SQL STABLE PARALLEL SAFE SECURITY INVOKER;
 
 -- 4. Préfixe de rôle
 -- Comparaison littérale : avec LIKE, '_' est un joker et is_allow('delete')

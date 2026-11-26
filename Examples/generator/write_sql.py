@@ -25,16 +25,16 @@ def add_new_row_level_in_list(policy, policy_table_name, policy_object_type, ada
             WHERE rrp.relation = '{relation}'
             AND rrp.object_type = '{policy_object_type}'
             AND rrp.allow_deny IS TRUE
-            AND rrp.user_id = get_current_user_id()
-            AND rrp.tenant_id = get_current_tenant_id()
+            AND rrp.user_id = (SELECT get_current_user_id())
+            AND rrp.tenant_id = (SELECT get_current_tenant_id())
             AND (rrp.expires_at IS NULL OR rrp.expires_at > statement_timestamp())"""
-    
+
     # Ajoute les règles si attributes
     if policy.get("attributes",False) == True:
-        data += f"""\n\t\t\tAND fn_check_all_attributes_from_view(rrp.id::UUID, '{adam_table}', get_current_user_attributes())"""
+        data += f"""\n\t\t\tAND fn_check_all_attributes_from_view(rrp.id::UUID, '{adam_table}', (SELECT get_current_user_attributes()))"""
     # Ajoute les règles si rules active
     if policy.get("rules",False) == True:
-        data += f"""\n\t\t\tAND fn_check_all_rules_from_view(rrp.id::UUID, '{adam_table}', get_current_user_attributes())"""
+        data += f"""\n\t\t\tAND fn_check_all_rules_from_view(rrp.id::UUID, '{adam_table}', (SELECT get_current_user_attributes()))"""
     # Ajoute de conditions sur les colonnes
     conditions_sql = format_conditions(policy.get("conditions",None), policy_table_name)
     if conditions_sql :

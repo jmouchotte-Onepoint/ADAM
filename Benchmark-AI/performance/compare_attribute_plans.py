@@ -19,25 +19,42 @@ import psycopg
 
 from performance.compare_authorization import IMAGES, setup_postgres, start_container
 from run import FIXTURE, ROOT, server_execution_ms, summarize, tests
-from support import connect
+from support import connect, delegate
 
 
-OLD = """NOT EXISTS (
+CORRELATED = """(
+              SELECT count(*) FROM view_all_access_attributes a
+              WHERE a.relation_type = 'permissions' AND a.id = p.id
+                AND fn_check_attributes((SELECT get_current_user_attributes()), a.attribute) IS NOT TRUE
+          ) = 0"""
+
+
+DECORRELATED = """NOT EXISTS (
               SELECT 1 FROM view_all_access_attributes a
               WHERE a.id = p.id AND a.relation_type = 'permissions'
-                AND fn_check_attributes(get_current_user_attributes(), a.attribute) IS NOT TRUE
+                AND fn_check_attributes((SELECT get_current_user_attributes()), a.attribute) IS NOT TRUE
           )"""
-NEW = "fn_check_all_attributes_from_view(p.id, 'permissions', get_current_user_attributes()) IS TRUE"
 
 
-def install_candidate(admin: psycopg.Connection) -> None:
+WRAPPER = ("fn_check_all_attributes_from_view(p.id, 'permissions', "
+           "(SELECT get_current_user_attributes())) IS TRUE")
+
+
+VARIANTS = {
+    "decorrelated-legacy": DECORRELATED,
+    "correlated-subquery": CORRELATED,
+    "targeted-wrapper": WRAPPER,
+}
+
+
+def install_variant(admin: psycopg.Connection, predicate: str) -> None:
     policies = FIXTURE.read_text().split("CREATE POLICY validation_select", 1)[1]
     policies = "CREATE POLICY validation_select" + policies
-    if policies.count(OLD) != 2:
-        raise RuntimeError("The baseline policies no longer match the expected attribute predicate")
+    if policies.count(CORRELATED) != 2:
+        raise RuntimeError("The fixture policies no longer match the expected attribute predicate")
     admin.execute("DROP POLICY validation_select ON protected_records")
     admin.execute("DROP POLICY validation_update ON protected_records")
-    admin.execute(policies.replace(OLD, NEW))
+    admin.execute(policies.replace(CORRELATED, predicate))
 
 
 def sample(operation: str, clients: int, n: int) -> list[float]:
@@ -101,14 +118,17 @@ def main() -> None:
             )
             admin.execute("ANALYZE")
         rows, raw, plans, checks = [], [], {}, {}
-        for variant in ("baseline", "targeted-wrapper"):
-            if variant == "targeted-wrapper":
-                with connect() as admin:
-                    install_candidate(admin)
+        for variant, predicate in VARIANTS.items():
+            with connect() as admin:
+                install_variant(admin, predicate)
             checks[variant] = {pattern: tests(pattern) for pattern in (
                 "test_protected_access.py", "test_concurrency.py", "test_repository_claims.py")}
             if any(result["exit_code"] for result in checks[variant].values()):
                 raise RuntimeError(f"{variant} regression tests failed: {checks[variant]}")
+            # La profession exigée par la contrainte ABAC vient de la délégation
+            # depuis le durcissement ; les suites ci-dessus la réinitialisent.
+            with connect() as admin:
+                delegate(admin, "nurse", "tenantA", {"profession": "nurse"})
             with connect(application=True) as db:
                 db.execute("SELECT set_config('app.adam.user_attributes', %s, false)",
                            ('{"profession":"nurse"}',))
@@ -130,7 +150,15 @@ def main() -> None:
             "started_at_utc": started_at,
             "postgres_version": version, "seeds": args.seeds,
             "samples_per_client_per_repeat": args.samples,
-            "protocol": "sequential A/B, same database; 10 warmups; 3 repetitions; EXPLAIN ANALYZE TIMING OFF",
+            "protocol": "sequential A/B/C, same database, in declaration order; 10 warmups; "
+                        "3 repetitions; EXPLAIN ANALYZE TIMING OFF",
+            "variants": {
+                "decorrelated-legacy": "published NOT EXISTS form; the planner converts it to a hash "
+                                       "anti-join, so the attribute scan is no longer correlated",
+                "correlated-subquery": "scalar count(*) subquery installed by the fixture; never "
+                                       "pulled up into a join, identical IS NOT TRUE semantics",
+                "targeted-wrapper": "fn_check_all_attributes_from_view; correlated but opaque to the planner",
+            },
             "scope": "experimental RLS adapter; always-true dynamic rule; no commit/network time",
             "checks": checks, "rows": rows,
             "source_sha256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -143,11 +171,10 @@ def main() -> None:
         }
         for filename, data in (("results.json", report), ("latencies.json", raw), ("plans.json", plans)):
             (args.output / filename).write_text(json.dumps(data, indent=2) + "\n")
-        print(f"PASS: baseline and targeted-wrapper; results in {args.output}")
+        print(f"PASS: {', '.join(VARIANTS)}; results in {args.output}")
     finally:
         for container in reversed(started):
             subprocess.run(["docker", "rm", "--force", container], check=True, stdout=subprocess.DEVNULL)
-
 
 if __name__ == "__main__":
     main()

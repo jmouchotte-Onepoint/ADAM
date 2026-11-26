@@ -468,21 +468,40 @@ uv run --locked --group validation python Benchmark-AI/check_extended_evaluation
   --output Results/local/extended-evaluation.json
 ```
 
-The [retained samples and plans](../Results/adam/attribute-ab-10000/results.json)
-compare the original experimental adapter predicate with an otherwise identical
-policy calling the existing attribute wrapper on a selected permission. Both
-run sequentially on the same database, baseline first: one/four clients, 10
-warm-ups, 30 measured operations per client, three repetitions, with
-`EXPLAIN ANALYZE TIMING OFF`. At 10,000 relations the baseline plan scanned
-permission attributes broadly; the targeted candidate was markedly faster in
-this workload. This is not a production or general performance claim.
+The experiment now compares **three** writings of the same attribute predicate,
+installed one after another on the same database in declaration order:
+
+| Variant | Predicate | Plan |
+|---|---|---|
+| `decorrelated-legacy` | `NOT EXISTS (SELECT 1 FROM view_all_access_attributes a WHERE a.id = p.id …)` | the planner pulls the SubLink up into a hash anti-join, so `a.id = p.id` stops being an indexed access and every attribute row is evaluated |
+| `correlated-subquery` | `(SELECT count(*) FROM view_all_access_attributes a WHERE … a.id = p.id …) = 0` | a scalar subquery is never pulled up into a join; the correlation holds and the index on `permissions_attributes(permission_id, attribute)` is used |
+| `targeted-wrapper` | `fn_check_all_attributes_from_view(p.id, 'permissions', …)` | correlated as well, but opaque to the planner |
+
+`correlated-subquery` is the form the fixture installs; the other two are
+obtained by substituting it in the policy text. All three keep the same
+`IS NOT TRUE` semantics, and `test_attribute_equivalence.py` asserts that they
+decide identically for local and inherited constraints, present and absent
+attributes.
+
+Each runs with one/four clients, 10 warm-ups, 30 measured operations per client,
+three repetitions, under `EXPLAIN ANALYZE TIMING OFF`. In the
+[retained campaign](../Results/adam/attribute-ab-10000/results.json), recorded
+before the correlated form existed, the de-correlated plan spent 39.97 ms of its
+41.35 ms on a full scan of `permissions_attributes` at 10,000 relations, where
+the wrapper reached 0.206 ms. This is not a production or general performance
+claim, and the retained campaign has only two of the three variants: rerun the
+command above to measure all three.
 
 The [extended checks](../Results/adam/extended-evaluation/results.json) ran 23
 methods against each variant, including local/inherited attributes, a
 simplified pathway, and a finite Event-B-inspired SQL correspondence.
-The wrapper is `SECURITY DEFINER`; privileges, its behavior under all
-constraint combinations and search-path assumptions need a security review.
-The production policies are not changed by this experiment. The
+Since the `A01-4/7` hardening the wrapper is `SECURITY INVOKER`, so the
+privilege objection no longer applies; its behavior under all constraint
+combinations still needs a review, which is one reason the fixture defaults to
+the fully declarative `correlated-subquery` form instead. The repository policy
+generator already emitted the correlated wrapper call, so it was never affected
+by the de-correlated plan: that predicate only ever existed in the hand-written
+experimental adapter. The
 `measurement-source/` snapshot preserves the helper files used for the A/B run;
 the current benchmark adds start-time and source-hash provenance.
 

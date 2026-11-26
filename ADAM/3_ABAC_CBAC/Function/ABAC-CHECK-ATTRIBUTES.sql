@@ -15,24 +15,24 @@ BEGIN
         RETURN TRUE;
     END IF;
 
-    -- Parcours de chaque JSON dans la liste
-    FOR v_rule IN SELECT * FROM jsonb_array_elements(p_rules_attributes)
-        LOOP
-            v_key := v_rule ->>'key';
-            v_operator := v_rule ->>'operator';
-            v_value := v_rule ->'value';
+    BEGIN
+        -- Parcours de chaque JSON dans la liste
+        FOR v_rule IN SELECT * FROM jsonb_array_elements(p_rules_attributes)
+            LOOP
+                v_key := v_rule ->>'key';
+                v_operator := v_rule ->>'operator';
+                v_value := v_rule ->'value';
 
-            -- Récupère la valeur utilisateur pour cette clé
-            v_user_attribute_value := p_users_attributes->>v_key;
+                -- Récupère la valeur utilisateur pour cette clé
+                v_user_attribute_value := p_users_attributes->>v_key;
 
-            -- Si l'utilisateur n'a pas cet attribut
-            IF v_user_attribute_value IS NULL THEN
-                RAISE DEBUG 'L''attribut "%" est NULL ou absent', v_key;
-                RETURN FALSE;
-            END IF;
+                -- Si l'utilisateur n'a pas cet attribut
+                IF v_user_attribute_value IS NULL THEN
+                    RAISE DEBUG 'L''attribut "%" est NULL ou absent', v_key;
+                    RETURN FALSE;
+                END IF;
 
-            -- Évaluation selon l'opérateur et le type
-            BEGIN
+                -- Évaluation selon l'opérateur et le type
                 -- Opérateur "IS" (égalité stricte)
                 IF v_operator = 'IS' THEN
                     IF v_user_attribute_value <> v_value->>0 THEN
@@ -64,13 +64,13 @@ BEGIN
                     RETURN FALSE;
                 END IF;
 
-            EXCEPTION WHEN OTHERS THEN
-                RAISE EXCEPTION 'Erreur lors de l''évaluation de l''attribut "%": %', v_key, SQLERRM;
-                RETURN FALSE;
-            END;
+            END LOOP;
 
-        END LOOP;
+    EXCEPTION WHEN OTHERS THEN
+        RAISE EXCEPTION 'Erreur lors de l''évaluation de l''attribut "%": %', v_key, SQLERRM;
+    END;
+
     -- Toutes les conditions sont validées
     RETURN TRUE;
 END;
-$$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE;
+$$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE COST 10000;
