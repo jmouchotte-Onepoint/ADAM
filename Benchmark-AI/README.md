@@ -78,8 +78,8 @@ uv run --group validation python Benchmark-AI/run.py --server-timing --output Re
 ```
 
 Choose a new output directory for each run: the runner refuses to overwrite
-existing result files. The published samples remain in `Results/adam/server-1000/`
-and `Results/adam/server-10000/`.
+existing result files. The published samples remain in `Results/adam/correlated-1000/`
+and `Results/adam/correlated-10000/`.
 
 The historical campaigns returned **1**: nine test methods passed, three
 assertions failed and one method raised an SQL error. They reproduced:
@@ -376,7 +376,7 @@ still has it:
 
 ```sh
 uv run --group validation python Article-Export/export_article.py \
-  Results/adam/server-1000 Results/adam/server-10000 \
+  Results/adam/correlated-1000 Results/adam/correlated-10000 \
   --table ../Article/Table/Runtime-Benchmark.tex
 ```
 
@@ -462,7 +462,7 @@ delegation window to elapse.
 
 ```sh
 uv run --locked --group validation python Benchmark-AI/performance/compare_attribute_plans.py \
-  --seeds 10000 --samples 30 --output Results/local/attribute-ab-10000
+  --seeds 10000 --samples 30 --output Results/local/attribute-ab3-10000
 uv run --locked --group validation python Benchmark-AI/check_extended_evaluation.py \
   --output Results/local/extended-evaluation.json
 ```
@@ -484,14 +484,14 @@ attributes.
 
 Each runs with one/four clients, 10 warm-ups, 30 measured operations per client,
 three repetitions, under `EXPLAIN ANALYZE TIMING OFF`. In the
-[retained campaign](../Results/adam/attribute-ab-10000/results.json), recorded
+[retained campaign](../Results/adam/attribute-ab3-10000/results.json), recorded
 before the correlated form existed, the de-correlated plan spent 39.97 ms of its
 41.35 ms on a full scan of `permissions_attributes` at 10,000 relations, where
 the wrapper reached 0.206 ms. This is not a production or general performance
 claim, and the retained campaign has only two of the three variants: rerun the
 command above to measure all three.
 
-The [extended checks](../Results/adam/extended-evaluation/results.json) ran 23
+The [extended checks](../Results/adam/attribute-ab3-10000/results.json) ran 23
 methods against each variant, including local/inherited attributes, a
 simplified pathway, and a finite Event-B-inspired SQL correspondence.
 Since the `A01-4/7` hardening the wrapper is `SECURITY INVOKER`, so the

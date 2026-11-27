@@ -2,10 +2,10 @@
 
 ## Current status after targeted fixes
 
-The [expanded 1,000-seed runner](../Results/adam/expanded-run-1000/results.json)
+The [expanded 1,000-seed runner](../Results/adam/correlated-1000/results.json)
 passed 23 test methods with exit code 0. Its timing samples were collected
 alongside local work and are not the manuscript's performance campaign.
-The [extended checks](../Results/adam/extended-evaluation/results.json) passed
+The [extended checks](../Results/adam/attribute-ab3-10000/results.json) passed
 the same 23 methods for both the original adapter and the experimental
 targeted-wrapper variant. These tests include a restricted synthetic clinical
 replay and a finite model-inspired SQL comparison, not a clinical trial or SQL
@@ -16,7 +16,7 @@ complete historical and consolidated reconstructions and a fresh installation,
 including duplicate-conflict recovery and reapplication. It is not assurance
 for an arbitrary production installation. The
 [OpenFGA/SpiceDB clinical projection](../Results/comparison/persistent-hardened-1000/results.json),
-[attribute A/B experiment](../Results/adam/attribute-ab-10000/results.json) and
+[attribute A/B experiment](../Results/adam/attribute-ab3-10000/results.json) and
 [Rodin replay](../Results/eventb/replay/rodin.log) are retained with their
 limitations and reproduction commands in the [README](README.md).
 
@@ -173,10 +173,10 @@ Both server-side campaigns reproduced the same 9 passing methods, 3 assertion
 failures and 1 SQL error (exit code 1 each). Protected operations use the
 experimental adapter, not the defective generated policy.
 
-- [1,000-seed results](../Results/adam/server-1000/results.json) and
-  [raw samples](../Results/adam/server-1000/latencies.json).
-- [10,000-seed results](../Results/adam/server-10000/results.json) and
-  [raw samples](../Results/adam/server-10000/latencies.json).
+- [1,000-seed results](../Results/adam/correlated-1000/results.json) and
+  [raw samples](../Results/adam/correlated-1000/latencies.json).
+- [10,000-seed results](../Results/adam/correlated-10000/results.json) and
+  [raw samples](../Results/adam/correlated-10000/latencies.json).
 - [Full table in the manuscript](../../Article/Table/Runtime-Benchmark.tex).
 
 ## Boundaries, NoSQL, and acceptance

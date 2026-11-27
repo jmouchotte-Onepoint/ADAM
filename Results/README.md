@@ -33,16 +33,10 @@ comparaison, Event-B) et [`NoSQL-PoC/`](../NoSQL-PoC/README.md) (MongoDB).
 
 | Dossier | Campagne |
 |---|---|
-| `server-1000` | 1 000 graines, **temps d'exécution serveur** (`--server-timing`) — campagne publiée |
-| `server-10000` | Idem, 10 000 graines — campagne publiée |
 | `sql-fixes-1000` | Campagne corrigée après les correctifs SQL : les 18 méthodes passent |
 | `fresh-install-1000` | Re-vérification sur installation neuve après consolidation |
-| `consent-validation-1000` | 20 méthodes, dont retrait de consentement concurrent ; temps non retenus pour la performance |
-| `attribute-ab-10000` | Comparaison A/B du prédicat d'attributs, 10 000 relations, échantillons, plans et sources de mesure |
 | `attribute-ab3-10000` | **Campagne publiée** : trois écritures du prédicat d'attributs — décorrélée, corrélée, enveloppante — sur une même base durcie |
 | `audit-cost-correlated` | **Campagne publiée** : coût du durcissement et du journal, une variable à la fois, avec le prédicat corrélé |
-| `extended-evaluation` | 23 tests pour chacune des deux variantes ; rejeu clinique et correspondance finie |
-| `expanded-run-1000` | Harnais complet : 23 méthodes réussies ; temps non retenus car travaux locaux simultanés |
 | `correlated-1000` | **Campagne publiée** : prédicat d'attributs corrélé, build durci complet, 23 méthodes réussies |
 | `correlated-10000` | Idem, 10 000 graines — campagne publiée |
 
