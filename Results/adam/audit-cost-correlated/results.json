@@ -1,0 +1,76 @@
+{
+  "started_at": "2026-11-27T09:55:00Z",
+  "seeds": 300,
+  "measured_reads": 100,
+  "measurement": "PostgreSQL EXPLAIN ANALYZE Execution Time; TIMING OFF",
+  "baseline": {
+    "variant": "baseline",
+    "graph_insert": {
+      "samples": 300,
+      "p50_ms": 1.898,
+      "p95_ms": 3.079,
+      "p99_ms": 3.548,
+      "wall_seconds": 0.96452866600157,
+      "operations_per_second": 311.03274643318036
+    },
+    "protected_read": {
+      "samples": 100,
+      "p50_ms": 0.183,
+      "p95_ms": 0.245,
+      "p99_ms": 0.327,
+      "wall_seconds": 0.01954,
+      "operations_per_second": 5117.70726714432
+    }
+  },
+  "hardened": {
+    "variant": "hardened",
+    "graph_insert": {
+      "samples": 300,
+      "p50_ms": 2.262,
+      "p95_ms": 2.965,
+      "p99_ms": 4.582,
+      "wall_seconds": 0.9699425840008189,
+      "operations_per_second": 309.29665832647544
+    },
+    "protected_read": {
+      "samples": 100,
+      "p50_ms": 0.454,
+      "p95_ms": 0.846,
+      "p99_ms": 0.95,
+      "wall_seconds": 0.051893999999999996,
+      "operations_per_second": 1927.0050487532278
+    }
+  },
+  "audited": {
+    "variant": "audited",
+    "graph_insert": {
+      "samples": 300,
+      "p50_ms": 4.069,
+      "p95_ms": 5.644,
+      "p99_ms": 6.83,
+      "wall_seconds": 1.6151182500034338,
+      "operations_per_second": 185.7449137234145
+    },
+    "audit_entries": 8431,
+    "audit_bytes": 7938048,
+    "permissions_bytes": 3006464,
+    "protected_read": {
+      "samples": 100,
+      "p50_ms": 0.373,
+      "p95_ms": 0.512,
+      "p99_ms": 0.769,
+      "wall_seconds": 0.039639,
+      "operations_per_second": 2522.7679810287846
+    }
+  },
+  "ratios": {
+    "graph_insert": {
+      "hardening": 1.192,
+      "audit": 1.799
+    },
+    "protected_read": {
+      "hardening": 2.481,
+      "audit": 0.822
+    }
+  }
+}

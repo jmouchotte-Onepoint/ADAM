@@ -380,10 +380,9 @@ uv run --group validation python Article-Export/export_article.py \
   --table ../Article/Table/Runtime-Benchmark.tex
 ```
 
-The earlier `Results/adam/client-1000/` and `Results/adam/client-10000/` are retained separately:
-their client-side times include driver/network handling and cannot be combined
-with the server-side samples. Omitting `--server-timing` reproduces the earlier
-client-clock protocol (300 measured operations per client and repetition).
+Omitting `--server-timing` measures the client clock instead, which includes
+driver and network handling and cannot be combined with the server-side samples
+(300 measured operations per client and repetition).
 
 There is no API to exercise with k6 in the supplied source. A future HTTP test
 should measure a real backend and distinguish token authentication, policy
@@ -393,7 +392,7 @@ an endpoint to substitute for such evidence.
 ## OpenFGA and SpiceDB comparison
 
 The runnable test and benchmark are in
-[`compare_authorization.py`](compare_authorization.py); no separate service
+[`compare_authorization.py`](performance/compare_authorization.py); no separate service
 installation is needed beyond Docker and the validation dependencies.
 From the `Code` directory:
 
@@ -402,16 +401,16 @@ uv run --group validation python Benchmark-AI/performance/compare_authorization.
   --output Results/local/new-comparison-1000 --seeds 1000
 ```
 
-The retained [results](../Results/comparison/1000/results.json) and
-[raw samples](../Results/comparison/1000/latencies.json) use PostgreSQL 18.6,
+The retained [results](../Results/comparison/persistent-hardened-1000/results.json) and
+[raw samples](../Results/comparison/persistent-hardened-1000/latencies.json) use PostgreSQL 18.6,
 OpenFGA 1.14.1 and SpiceDB 1.57.1. All containers are disposable, restricted to
 one CPU and 1 GiB, and bound to random localhost ports. The service stores are
-in-memory; the local SpiceDB key is a disposable test value, not a production
+PostgreSQL-backed; the local SpiceDB key is a disposable test value, not a production
 credential. SpiceDB telemetry is disabled.
 
-A [fresh-install rerun](../Results/comparison/fresh-1000/results.json) also passed the
-decision checks after SQL consolidation. Other local work was running during
-this check; use the retained comparison above for the manuscript's timings.
+The campaign reported in the manuscript was rerun on the hardened build, where
+each synthetic subject is provisioned as a recorded delegation; the earlier
+campaign in `persistent-1000` predates the A01 identity corrections.
 
 The common subset is one synthetic direct assignment per record and an allowed
 read; checks also verify other subject, absent record, a different tenant
@@ -448,7 +447,7 @@ are sequential. Different models, protocols, caches, resource contention, and
 transaction/consistency guarantees prevent a general ranking. Persistent
 storage does not by itself prove equivalent durability.
 
-The same command now also runs a [synthetic pathway projection](../Results/comparison/clinical-replay-1000/results.json):
+The same command now also runs a [synthetic pathway projection](../Results/comparison/persistent-hardened-1000/results.json):
 11 expected decisions at T0--T4 and negative controls are checked against the
 experimental SQL adapter and both service APIs. For OpenFGA/SpiceDB the driver
 explicitly adds/removes direct tuples when state changes; it does not establish

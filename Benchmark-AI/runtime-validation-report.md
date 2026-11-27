@@ -15,7 +15,7 @@ The [migration test](../Results/adam/migration-validation.log) passed for
 complete historical and consolidated reconstructions and a fresh installation,
 including duplicate-conflict recovery and reapplication. It is not assurance
 for an arbitrary production installation. The
-[OpenFGA/SpiceDB clinical projection](../Results/comparison/clinical-replay-1000/results.json),
+[OpenFGA/SpiceDB clinical projection](../Results/comparison/persistent-hardened-1000/results.json),
 [attribute A/B experiment](../Results/adam/attribute-ab-10000/results.json) and
 [Rodin replay](../Results/eventb/replay/rodin.log) are retained with their
 limitations and reproduction commands in the [README](README.md).
@@ -94,10 +94,10 @@ The historical command returned **1** before the fixes; the corrected run
 returns **0**.
 
 - [Strategy and commands](README.md).
-- [Final settings, hashes, tests and repetition summaries](../Results/adam/client-1000/results.json).
-- [Raw client latency samples](../Results/adam/client-1000/latencies.json).
-- [Query plans](../Results/adam/client-1000/plans.json).
-- [10,000-seed results](../Results/adam/client-10000/results.json), [samples](../Results/adam/client-10000/latencies.json), and [plans](../Results/adam/client-10000/plans.json).
+- [Final settings, hashes, tests and repetition summaries](../Results/adam/correlated-1000/results.json).
+- [Raw server latency samples](../Results/adam/correlated-1000/latencies.json).
+- [Query plans](../Results/adam/correlated-1000/plans.json).
+- [10,000-seed results](../Results/adam/correlated-10000/results.json), [samples](../Results/adam/correlated-10000/latencies.json), and [plans](../Results/adam/correlated-10000/plans.json).
 - [Protected-access tests](test_protected_access.py).
 - [Lifecycle tests](test_lifecycle.py).
 - [Concurrent-revocation tests](test_concurrency.py).

@@ -1,0 +1,394 @@
+{
+  "started_at": "2026-11-26T17:00:06Z",
+  "server_version": "PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit",
+  "settings": {
+    "fsync": "on",
+    "max_connections": "100",
+    "shared_buffers": "16384",
+    "synchronous_commit": "on",
+    "work_mem": "4096"
+  },
+  "source_sha256": {
+    "ADAM/0_INIT/INIT-CREATE-SCHEMA.sql": "5822b9dbe72793f2891cb4ba603a517b991477b726ca506d0de50987e2ff4836",
+    "ADAM/0_INIT/INIT-TENANTS.sql": "fe56b73fca56c3a2567bcf40309a482b8414fb266a66b84c23cedd58ad98e1ac",
+    "ADAM/0_INIT/INIT-USERS-PER-PG-USER.sql": "b6b46acc9d9ec684090f0d1b13784ec95f0f6dbd2a4a70d086fee8c42af71bd9",
+    "ADAM/0_INIT/INIT-VALUES-PG-USER.sql": "262d0766f8c8bd67d4d67cbc7a3acada5b24ba6f546a2359d06a2c8a1ccf2ccc",
+    "ADAM/0_INIT/Function/INIT-GET-TENANT-ID.sql": "947a3edf68c03f013589ca523540aefc366f6e408da803143d455aa9f19cbc4f",
+    "ADAM/0_INIT/Function/INIT-GET-USER-INFOS.sql": "9e09b115e02c39c0261c9b49ca0d2238fb43220c2d148a0ef1d94f7313222e3c",
+    "ADAM/0_INIT/Function/INIT-CHECK-RUNTIME-ROLE.sql": "9eaf0db3f58e515675c2b9f1a544dea2fa54bee828dad1723de3575a984a4e5d",
+    "ADAM/0_INIT/Policy/INIT-POLICY-DELEGATIONS.sql": "efb2c236d0892a6941162b1124c8b6e0b3960b69bde877931d449a9ab163b867",
+    "ADAM/1_REBAC_RBAC/REBAC-MODEL.sql": "ccf781a84eedecdf576e8fcb3360e919b4dfc94ea3c8efd2440308a3593bfedf",
+    "ADAM/1_REBAC_RBAC/REBAC-RELATIONS.sql": "e0de94dca960b3850ec6e735312d60cc9dc2f3fe4fa9341a170bef936a5774b7",
+    "ADAM/1_REBAC_RBAC/REBAC-ROLES.sql": "7aea6b827f0449ecf9854ce57e9496646cfaf4953a4c7a5d4b01049e81494c18",
+    "ADAM/1_REBAC_RBAC/REBAC-PERMISSIONS.sql": "0cc58db1f799e3eaae8c340221f0715f38fc68252533d55080058f5115f928c2",
+    "ADAM/1_REBAC_RBAC/REBAC-FIX-UNIQUE-INDEXES.sql": "045454cd4833d99904c47560f5a14d8def205140918c2a5ed97a785daf226fd0",
+    "ADAM/1_REBAC_RBAC/Recursive/REBAC-RECURSIVE-INSERT.sql": "48524fb5d17cd9ea3b6654e07f4134b2b7fab87fcf36cdd41870becefb70a546",
+    "ADAM/1_REBAC_RBAC/Recursive/REBAC-RECURSIVE-UPDATE.sql": "3bb070b0c1bd68beb8d2665df581f56864dc8e870c226a01b839ffa6d669d59c",
+    "ADAM/1_REBAC_RBAC/Function/REBAC-FUNC-CHECK-MODEL-CONDITION.sql": "657f9df1537b2426cc2db640b9260e8ea288a74e7cc8c08c6332a49f23e4a015",
+    "ADAM/1_REBAC_RBAC/Function/REBAC-FUNC-EXPIRATION-DATE.sql": "c7d8e19f6fa2c58b5089b119bc3d954312e6f944a7e59efba9939dfc85544607",
+    "ADAM/1_REBAC_RBAC/Function/REBAC-FUNC-TRIGGER-SET-MODEL-ID.sql": "a146c84d13e4242afa178719f64a47d40b76a6fc3c719d79d5e3df61d8b4c0b2",
+    "ADAM/1_REBAC_RBAC/Function/REBAC-FUNC-TRIGGER-SET-CONDITION-RELATION-ID.sql": "4f91572d814a35925732311496107ab5a8a91f5a2752882aaccbd8a15ab5619d",
+    "ADAM/1_REBAC_RBAC/Trigger/REBAC-TRIGGER-RELATIONS.sql": "97c937435a71935d849b9efa4ca4ad12e10bd49bb9a4e2e4752e1ee759212ec5",
+    "ADAM/1_REBAC_RBAC/Trigger/REBAC-TRIGGER-ROLES.sql": "cd10fa656cfc4f49b854f34ce9eac35bff6e86b85bbb33907f08be52c4a976ea",
+    "ADAM/1_REBAC_RBAC/Policy/REBAC-POLICY-ADD-RLS.sql": "c29d1645666460074c5076cf284bc883e99516151bfed182af3d8073a9b4afa3",
+    "ADAM/1_REBAC_RBAC/Policy/REBAC-POLICY-RELATIONS.sql": "baaea8b671f9248c5292afc9f0831ad8b4773a647c3c5c7b97547e474231dad2",
+    "ADAM/1_REBAC_RBAC/Policy/REBAC-POLICY-ROLES.sql": "a0f693421641d6e208f4379500b9509f219bfa6b1484fed382b0f242e1af8313",
+    "ADAM/1_REBAC_RBAC/Policy/REBAC-POLICY-PERMISSIONS.sql": "efffc268c49269b66357a805422844eff76b0371fecdcb3edb506c795539c29a",
+    "ADAM/2_RUBAC/RUBAC-RULES-DYNAMIC.sql": "a169a5e9c25ac4d78b8dffa42021bf61ebc49822190afb07c760008effd8dc14",
+    "ADAM/2_RUBAC/RUBAC-RULES-MODEL.sql": "149b4c3039b71fb61704f9daeb0866bb68534e4749dc858e64b760493ca14ed3",
+    "ADAM/2_RUBAC/RUBAC-RULES-RELATIONS.sql": "7e23e00cd7c5e0f96d7cfbb862d36b9075c2c16203b066ee4582874d6368d40a",
+    "ADAM/2_RUBAC/RUBAC-RULES-ROLES.sql": "ff52806009361f6bc845979c890d22c1debefdee4cd322b09bae8b01ea6503e8",
+    "ADAM/2_RUBAC/RUBAC-RULES-PERMISSIONS.sql": "7e2eed4fab88719b7503fe1ac934c71051f4005a2bf89ae886b7e7ea5b107b3e",
+    "ADAM/2_RUBAC/Function/RUBAC-FUNC-CHECK-DYNAMIC-RULES.sql": "a03ebe1e32b7ff12a0a00dfc5f2666a5d7fe1d4aa07e9fe4dc73ec5f8a2b3e28",
+    "ADAM/2_RUBAC/Function/RUBAC-FUNC-CHECK-ALL-RULES-FROM-VIEW.sql": "6753ce0e5ca2bd7e434c6745035eaef32842768615f1264080f62909e50d3f44",
+    "ADAM/2_RUBAC/Function/RUBAC-FUNC-TRIGGER-CHECK-RULES-FROM-MODEL-RULES.sql": "d66e2c19648c88c8d8aebd23e3cc72a89aad1b7007d43a2fdaf60069815e2593",
+    "ADAM/2_RUBAC/Policy/RUBAC-POLICY-RULES-ADD-RLS.sql": "0a2d8e4673c4793d7100d2227e00dded1e42141fe9499c00db7a7c96d8eda32f",
+    "ADAM/2_RUBAC/Policy/RUBAC-POLICY-RULES-MODEL.sql": "3f5e577c4c894da0f9117e30d1c425f9258e020ad134b286a7268719542342d2",
+    "ADAM/2_RUBAC/Policy/RUBAC-POLICY-RULES-RELATIONS.sql": "ba5eabf18d5e4c82b8e14c606a7f390442f83b353034ba3373b28c0f61cd6c48",
+    "ADAM/2_RUBAC/Policy/RUBAC-POLICY-RULES-ROLES.sql": "c221258bc173c9543fe05a519ad69a87b4cfadd6283d54f0b7be61a4293d383c",
+    "ADAM/2_RUBAC/Policy/RUBAC-POLICY-RULES-PERMISSIONS.sql": "8a166821dafc2b522d7ba31c767fea7d12f80b4a789fe1440209779bd76c9cab",
+    "ADAM/2_RUBAC/View/RUBAC-VIEW-RULES-RELATIONS.sql": "59b69b59482b697a33c80d2e2d58c9077dfcfa83e8c93fb1c48e96e84442c5f4",
+    "ADAM/2_RUBAC/View/RUBAC-VIEW-RULES-ROLES.sql": "47878e0c02a1024e9646607e3ec9b554e0f54045ac16236d18f1d1213b9da1b4",
+    "ADAM/2_RUBAC/View/RUBAC-VIEW-RULES-PERMISSIONS.sql": "55b43292fa10ad033e670e7f78a5a33391b3a187b946a725c3862158ed1f6fda",
+    "ADAM/2_RUBAC/View/RUBAC-VIEW-RULES-ALL.sql": "13043bfdd96999438698a250e9a6efb7efb380558fa577a629004e902bee7f15",
+    "ADAM/2_RUBAC/Trigger/RUBAC-TRIGGER-RULES-RELATIONS.sql": "744bc1e6c923c1a820b627782b4164404febffd463934a1247c69f5135567ba7",
+    "ADAM/2_RUBAC/Trigger/RUBAC-TRIGGER-RULES-ROLES.sql": "101b6c0941600d84f4f886628eb4ad0b835a6fca6e6894b753262fb08efe48c2",
+    "ADAM/3_ABAC_CBAC/ABAC-ATTRIBUTES-RELATIONS.sql": "823c22a3ebcadb4eb5c1e8402c4035aaff6df83caa44f220bd3dfa8c3edfba7f",
+    "ADAM/3_ABAC_CBAC/ABAC-ATTRIBUTES-ROLES.sql": "a823d949586ae750476cca4fbcaa0dbb27e9274159ce5d02fae4fb65574a4721",
+    "ADAM/3_ABAC_CBAC/ABAC-ATTRIBUTES-PERMISSIONS.sql": "e327c37e8ee852c691917c0f487743af3ce17345b356f8ecd8a2e645d304c62e",
+    "ADAM/3_ABAC_CBAC/Function/ABAC-CHECK-ATTRIBUTES.sql": "96aabc0015a3eb6a6b53d499680d79e4cc463823db7e89721c3049b79a35ada0",
+    "ADAM/3_ABAC_CBAC/Function/ABAC-CHECK-ALL-ATTRIBUTES-FROM-VIEW.sql": "dd05c85cd6feee377ff06953ab72e92f7212dd0c5170bdd8223c2cbefffa3faa",
+    "ADAM/3_ABAC_CBAC/Policy/ABAC-POLICY-ATTRIBUTES-ADD-RLS.sql": "146810a20392dadfbffc518aa62b31e44184525b86193d32f76b042125dea45d",
+    "ADAM/3_ABAC_CBAC/Policy/ABAC-POLICY-ATTRIBUTES-RELATIONS.sql": "547f4e27c0c7758dbe307f55ea80b3aadfe12c0c9e078a70e9154e77479ce9fe",
+    "ADAM/3_ABAC_CBAC/Policy/ABAC-POLICY-ATTRIBUTES-ROLES.sql": "93a30b8f28a0cc657ab1477af81344deef94cb793d2198a043d12536307b65c1",
+    "ADAM/3_ABAC_CBAC/Policy/ABAC-POLICY-ATTRIBUTES-PERMISSIONS.sql": "38bcb38083f9fc76c10e49806da49a712e3b8a946e9fd7635d82398ee09fe76e",
+    "ADAM/3_ABAC_CBAC/View/ABAC-VIEW-ATTRIBUTES-RELATIONS.sql": "017efde900e3ea685da045374011b4e6a5bacbccf384b84dc1ae80bd52253d18",
+    "ADAM/3_ABAC_CBAC/View/ABAC-VIEW-ATTRIBUTES-ROLES.sql": "001e95de10cb268b66a1fd74d2e0104e0950c54a0220a8f4f55fd36d190a8974",
+    "ADAM/3_ABAC_CBAC/View/ABAC-VIEW-ATTRIBUTES-PERMISSIONS.sql": "37f406b9bf574e39efb36058431d1bba3f03edd5d832b4e60d2ce308fddae5d5",
+    "ADAM/3_ABAC_CBAC/View/ABAC-VIEW-ATTRIBUTES-ALL.sql": "9f1a34064a2cd630b264fbde23aaa67ef1d4e8b05ba5b4b7de2daaba3f25ab7d",
+    "ADAM/6_AUDIT_TRAIL/AUDIT-TABLES.sql": "131a79b797598abcdf1de74946eede92ca266b3ab66e84413a735a907e6ee9c4",
+    "ADAM/6_AUDIT_TRAIL/Function/AUDIT-FUNC-APPEND-ONLY.sql": "490b74e5d2070a28bd0cab8fa44f6513ed913a15fce54c9c1b34cdd2228e1ccd",
+    "ADAM/6_AUDIT_TRAIL/Function/AUDIT-FUNC-PAYLOAD.sql": "e426f6c6f68c58ab82e7d979d84a3a92dcc57f8fd8a3a38fb8ec8d2d883af054",
+    "ADAM/6_AUDIT_TRAIL/Function/AUDIT-FUNC-APPEND.sql": "a2fc065d235d94dc6f8be26ca9036d5bb5993d00de23e9eec1f95d3629caf0fa",
+    "ADAM/6_AUDIT_TRAIL/Function/AUDIT-FUNC-ROW.sql": "db93760883a1add59e144e3deb9bef95a0057493b9409f63735cad389dbf76bc",
+    "ADAM/6_AUDIT_TRAIL/Function/AUDIT-FUNC-LOG-DECISION.sql": "9f797240300bcdb9bdfa274b5070215fe5f8d23dc02e700010c58753d3a99399",
+    "ADAM/6_AUDIT_TRAIL/Function/AUDIT-FUNC-VERIFY-CHAIN.sql": "d06ca7682bde9f40b3beb0756f5c5580ca8720ce24149a7b83983fda58b18836",
+    "ADAM/6_AUDIT_TRAIL/Policy/AUDIT-POLICY-LOG.sql": "f1998b0138f2329131d02551a7153e48183ae0e398632beaa1d18e41172a172a",
+    "ADAM/6_AUDIT_TRAIL/Trigger/AUDIT-TRIGGER-APPEND-ONLY.sql": "4f27280940dabfecc657757302c6bd8b9fbc0e5b73d5c9d0760a71c1af247238",
+    "ADAM/6_AUDIT_TRAIL/Trigger/AUDIT-TRIGGER-ATTACH.sql": "9ec45eeded52ca3a4e280131d577203563098437632950a8a1221386049702c7",
+    "ADAM/7_SECURITY/SECURITY-SEARCH-PATH.sql": "be3e1cff9327fe4c5677f721e4ca9313b5e27c6c56fc66c33c8bdc185c458200",
+    "Benchmark-AI/sql/fixture.sql": "2879272767f9fc54df4346aadfe6268dbb24ec852be3450d8aa4f18222cb4238",
+    "ADAM/4_INSERT/INSERT-RLS-POLICY.sql": "be27e1b60cb56bcd8b1068ad8889326fa5c12bf2c36eb4b3b0333d75b9820ba7"
+  },
+  "docker_image": "sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336",
+  "adapter_tests": {
+    "exit_code": 0,
+    "run": 4,
+    "passed": [
+      "test_protected_access.ProtectedAccessTests.test_attribute_required_at_read_time",
+      "test_protected_access.ProtectedAccessTests.test_consent_and_expiration_without_cleanup",
+      "test_protected_access.ProtectedAccessTests.test_read_write_and_persistence",
+      "test_protected_access.ProtectedAccessTests.test_wrong_subject_missing_identity_and_wrong_tenant"
+    ],
+    "failures": [],
+    "errors": []
+  },
+  "lifecycle_tests": {
+    "exit_code": 0,
+    "run": 3,
+    "passed": [
+      "test_lifecycle.LifecycleTests.test_duplicate_seed_rejected",
+      "test_lifecycle.LifecycleTests.test_materialization_and_cascade",
+      "test_lifecycle.LifecycleTests.test_unknown_model_rejected"
+    ],
+    "failures": [],
+    "errors": []
+  },
+  "concurrency_tests": {
+    "exit_code": 0,
+    "run": 4,
+    "passed": [
+      "test_concurrency.ConcurrencyTests.test_consent_withdrawal_is_visible_after_commit_in_read_committed",
+      "test_concurrency.ConcurrencyTests.test_consent_withdrawal_keeps_snapshot_but_blocks_stale_write",
+      "test_concurrency.ConcurrencyTests.test_read_committed_observes_committed_revocation",
+      "test_concurrency.ConcurrencyTests.test_repeatable_read_keeps_old_snapshot"
+    ],
+    "failures": [],
+    "errors": []
+  },
+  "repository_claim_tests": {
+    "exit_code": 0,
+    "run": 9,
+    "passed": [
+      "test_repository_claims.RepositoryClaimTests.test_attribute_wrapper_evaluates_declared_constraint",
+      "test_repository_claims.RepositoryClaimTests.test_generated_policy_allows_only_the_target_record",
+      "test_repository_claims.RepositoryClaimTests.test_generated_policy_rejects_another_subject",
+      "test_repository_claims.RepositoryClaimTests.test_generated_policy_rejects_expired_permission",
+      "test_repository_claims.RepositoryClaimTests.test_generator_produces_a_working_policy",
+      "test_repository_claims.RepositoryClaimTests.test_index_rejects_duplicate_null_parent_roles",
+      "test_repository_claims.RepositoryClaimTests.test_permission_index_rejects_duplicate_null_parent",
+      "test_repository_claims.RepositoryClaimTests.test_unique_index_preserves_distinct_parent_paths",
+      "test_repository_claims.RepositoryClaimTests.test_unique_index_rejects_duplicate_null_parent"
+    ],
+    "failures": [],
+    "errors": []
+  },
+  "clinical_tests": {
+    "exit_code": 0,
+    "run": 1,
+    "passed": [
+      "test_clinical_replay.ClinicalReplayTests.test_synthetic_pathway_and_negative_controls"
+    ],
+    "failures": [],
+    "errors": []
+  },
+  "eventb_sql_tests": {
+    "exit_code": 0,
+    "run": 1,
+    "passed": [
+      "test_eventb_sql_correspondence.EventBSQLCorrespondenceTests.test_finite_instances_with_subject_metadata_and_tenant_scope"
+    ],
+    "failures": [],
+    "errors": []
+  },
+  "attribute_equivalence_tests": {
+    "exit_code": 0,
+    "run": 1,
+    "passed": [
+      "test_attribute_equivalence.AttributeEquivalenceTests.test_three_predicate_forms_agree_for_local_and_inherited_constraints"
+    ],
+    "failures": [],
+    "errors": []
+  },
+  "benchmark": {
+    "rows": [
+      {
+        "operation": "seed_insert_26_tuples",
+        "clients": 1,
+        "samples": 10000,
+        "p50_ms": 3.01,
+        "p95_ms": 6.084,
+        "p99_ms": 11.642,
+        "wall_seconds": 43.22198579199903,
+        "operations_per_second": 231.36373345093122
+      },
+      {
+        "operation": "permission_lookup",
+        "clients": 1,
+        "repeat": 1,
+        "samples": 100,
+        "p50_ms": 0.029,
+        "p95_ms": 0.093,
+        "p99_ms": 0.169,
+        "wall_seconds": 0.10114625000278465,
+        "operations_per_second": 988.6673999011026
+      },
+      {
+        "operation": "protected_read",
+        "clients": 1,
+        "repeat": 1,
+        "samples": 100,
+        "p50_ms": 0.313,
+        "p95_ms": 0.937,
+        "p99_ms": 1.318,
+        "wall_seconds": 0.3266823750018375,
+        "operations_per_second": 306.10772925670545
+      },
+      {
+        "operation": "protected_write",
+        "clients": 1,
+        "repeat": 1,
+        "samples": 100,
+        "p50_ms": 1.195,
+        "p95_ms": 3.24,
+        "p99_ms": 5.087,
+        "wall_seconds": 1.2927191659982782,
+        "operations_per_second": 77.35632195317292
+      },
+      {
+        "operation": "permission_lookup",
+        "clients": 1,
+        "repeat": 2,
+        "samples": 100,
+        "p50_ms": 0.027,
+        "p95_ms": 0.094,
+        "p99_ms": 0.166,
+        "wall_seconds": 0.09507037500588922,
+        "operations_per_second": 1051.8523777128828
+      },
+      {
+        "operation": "protected_read",
+        "clients": 1,
+        "repeat": 2,
+        "samples": 100,
+        "p50_ms": 0.285,
+        "p95_ms": 0.391,
+        "p99_ms": 0.503,
+        "wall_seconds": 0.22774249999929452,
+        "operations_per_second": 439.09239601879216
+      },
+      {
+        "operation": "protected_write",
+        "clients": 1,
+        "repeat": 2,
+        "samples": 100,
+        "p50_ms": 0.874,
+        "p95_ms": 1.039,
+        "p99_ms": 1.42,
+        "wall_seconds": 0.619372042005125,
+        "operations_per_second": 161.45384876634867
+      },
+      {
+        "operation": "permission_lookup",
+        "clients": 1,
+        "repeat": 3,
+        "samples": 100,
+        "p50_ms": 0.032,
+        "p95_ms": 0.112,
+        "p99_ms": 0.184,
+        "wall_seconds": 0.10547924999991665,
+        "operations_per_second": 948.0537641297129
+      },
+      {
+        "operation": "protected_read",
+        "clients": 1,
+        "repeat": 3,
+        "samples": 100,
+        "p50_ms": 0.675,
+        "p95_ms": 1.381,
+        "p99_ms": 3.974,
+        "wall_seconds": 0.5659650839952519,
+        "operations_per_second": 176.6893450282861
+      },
+      {
+        "operation": "protected_write",
+        "clients": 1,
+        "repeat": 3,
+        "samples": 100,
+        "p50_ms": 1.137,
+        "p95_ms": 2.065,
+        "p99_ms": 2.633,
+        "wall_seconds": 0.8303207499993732,
+        "operations_per_second": 120.43538596388863
+      },
+      {
+        "operation": "permission_lookup",
+        "clients": 4,
+        "repeat": 1,
+        "samples": 400,
+        "p50_ms": 0.074,
+        "p95_ms": 0.168,
+        "p99_ms": 0.296,
+        "wall_seconds": 0.22588658400491113,
+        "operations_per_second": 1770.8001639942609
+      },
+      {
+        "operation": "protected_read",
+        "clients": 4,
+        "repeat": 1,
+        "samples": 400,
+        "p50_ms": 0.392,
+        "p95_ms": 1.464,
+        "p99_ms": 56.686,
+        "wall_seconds": 1.2194125000023632,
+        "operations_per_second": 328.026816191588
+      },
+      {
+        "operation": "protected_write",
+        "clients": 4,
+        "repeat": 1,
+        "samples": 400,
+        "p50_ms": 1.075,
+        "p95_ms": 3.15,
+        "p99_ms": 63.074,
+        "wall_seconds": 2.897174707999511,
+        "operations_per_second": 138.0655432672193
+      },
+      {
+        "operation": "permission_lookup",
+        "clients": 4,
+        "repeat": 2,
+        "samples": 400,
+        "p50_ms": 0.026,
+        "p95_ms": 0.078,
+        "p99_ms": 0.115,
+        "wall_seconds": 0.10811949999333592,
+        "operations_per_second": 3699.6101538080966
+      },
+      {
+        "operation": "protected_read",
+        "clients": 4,
+        "repeat": 2,
+        "samples": 400,
+        "p50_ms": 0.443,
+        "p95_ms": 1.101,
+        "p99_ms": 65.321,
+        "wall_seconds": 1.3114833750005346,
+        "operations_per_second": 304.9981476126885
+      },
+      {
+        "operation": "protected_write",
+        "clients": 4,
+        "repeat": 2,
+        "samples": 400,
+        "p50_ms": 1.215,
+        "p95_ms": 2.562,
+        "p99_ms": 69.904,
+        "wall_seconds": 2.765345583000453,
+        "operations_per_second": 144.6473823955096
+      },
+      {
+        "operation": "permission_lookup",
+        "clients": 4,
+        "repeat": 3,
+        "samples": 400,
+        "p50_ms": 0.024,
+        "p95_ms": 0.051,
+        "p99_ms": 0.104,
+        "wall_seconds": 0.06354487500357209,
+        "operations_per_second": 6294.764132866963
+      },
+      {
+        "operation": "protected_read",
+        "clients": 4,
+        "repeat": 3,
+        "samples": 400,
+        "p50_ms": 0.345,
+        "p95_ms": 1.029,
+        "p99_ms": 55.558,
+        "wall_seconds": 0.7707171669972013,
+        "operations_per_second": 518.9971329670052
+      },
+      {
+        "operation": "protected_write",
+        "clients": 4,
+        "repeat": 3,
+        "samples": 400,
+        "p50_ms": 1.311,
+        "p95_ms": 3.304,
+        "p99_ms": 70.023,
+        "wall_seconds": 2.8949926669956767,
+        "operations_per_second": 138.16960732239303
+      },
+      {
+        "operation": "cascade_revocation_26_tuples",
+        "clients": 1,
+        "samples": 100,
+        "p50_ms": 24.95,
+        "p95_ms": 26.422,
+        "p99_ms": 43.971,
+        "wall_seconds": 2.7265852500058827,
+        "operations_per_second": 36.67591174704119
+      }
+    ],
+    "seed_count": 10000,
+    "tuples_per_seed": 26,
+    "attributes_per_permission": 1,
+    "rules_per_permission": 1,
+    "measurement": "PostgreSQL EXPLAIN ANALYZE Execution Time; TIMING OFF; includes triggers; excludes planning and commit",
+    "samples_per_client_per_repeat": 100,
+    "throughput_scope": "instrumented wall-clock including connections and 20 warm-up requests per worker",
+    "scope": "existing SQL core + experimental protected_records RLS adapter; no HTTP/JWT/vault"
+  },
+  "overall": "PASS"
+}
